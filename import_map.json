@@ -1,5 +1,7 @@
 {
   "imports": {
+    "deco-sites/notta/": "./",
+
     "$store/": "./",
     "apps/": "https://denopkg.com/deco-cx/apps@0.7.3/",
     "deco/": "https://denopkg.com/deco-cx/deco@1.36.10/",
