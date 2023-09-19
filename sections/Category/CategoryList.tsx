@@ -1,6 +1,5 @@
 import Header from "$store/components/ui/SectionHeader.tsx";
-import Slider from "$store/components/ui/Slider.tsx";
-import SliderJS from "$store/islands/SliderJS.tsx";
+import {Container} from "$store/components/ui/Container.tsx"
 import { useId } from "$store/sdk/useId.ts";
 import Image from "apps/website/components/Image.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
@@ -15,10 +14,6 @@ export interface Category {
 }
 
 export interface Props {
-  header?: {
-    title?: string;
-    description?: string;
-  };
   list?: Category[];
   layout?: {
     headerAlignment?: "center" | "left";
@@ -28,11 +23,11 @@ export interface Props {
     };
   };
 }
-
 function CardText(
-  { tag, label, description, alignment }: {
+  { tag, label, description, alignment, classes }: {
     tag?: string;
     label?: string;
+    classes?: string;
     description?: string;
     alignment?: "center" | "left";
   },
@@ -40,12 +35,12 @@ function CardText(
   return (
     <div
       class={`flex flex-col ${
-        alignment === "center" ? "text-center" : "text-left"
-      }`}
+        alignment === "center" ? "text-center" : "text-left" 
+      } ${classes}`}
     >
       {tag && <div class="text-sm text-primary">{tag}</div>}
-      {label && <h3 class="text-lg text-base-content">{label}</h3>}
-      {description && <div class="text-sm text-neutral">{description}</div>}
+      {label && <h3 class="text-lg text-white uppercase ">{label}</h3>}
+      {description && <div class="text-sm text-white">{description}</div>}
     </div>
   );
 }
@@ -53,10 +48,6 @@ function CardText(
 function CategoryList(props: Props) {
   const id = useId();
   const {
-    header = {
-      title: "",
-      description: "",
-    },
     list = [
       {
         tag: "10% off",
@@ -80,32 +71,27 @@ function CategoryList(props: Props) {
   return (
     <div
       id={id}
-      class="container py-8 flex flex-col gap-8 lg:gap-10 text-base-content  lg:py-10"
+      class="container lg:max-w-full py-2 flex flex-col gap-8 lg:gap-10 text-base-content px-2  lg:py-3 overflow-x-auto"
     >
-      <Header
-        title={header.title}
-        description={header.description || ""}
-        alignment={layout.headerAlignment || "center"}
-      />
-
-      <Slider class="carousel carousel-start gap-4 lg:gap-8 row-start-2 row-end-5">
-        {list.map((
+      <Container classes="grid grid-cols-4 gap-2 w-max md:w-full">
+        {list?.slice(0,4).map((
           { tag, label, description, href, image, buttonText },
           index,
         ) => (
-          <Slider.Item
-            index={index}
-            class="flex flex-col gap-4 carousel-item first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-0"
+          <Container
+          key={index}
+            classes="flex flex-col gap-4 col-span-1 first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-0"
           >
             <a
               href={href}
-              class="flex flex-col gap-4 lg:w-[280px] w-40 lg:h-auto"
+              class="flex flex-col gap-4 lg:w-full w-40 lg:h-auto relative"
             >
               {layout.categoryCard?.textPosition === "top" &&
                 (
                   <CardText
                     tag={tag}
                     label={label}
+                    classes="absolute bottom-4 left-3 z-10"
                     description={description}
                     alignment={layout?.categoryCard?.textAlignment}
                   />
@@ -114,7 +100,7 @@ function CategoryList(props: Props) {
                 (
                   <figure>
                     <Image
-                      class="card w-full"
+                      class="card rounded-none w-full"
                       src={image}
                       alt={description || label || tag}
                       width={160}
@@ -135,11 +121,9 @@ function CategoryList(props: Props) {
             </a>
             {buttonText &&
               <a href={href} class="btn">{buttonText}</a>}
-          </Slider.Item>
+          </Container>
         ))}
-      </Slider>
-
-      <SliderJS rootId={id} />
+      </Container>
     </div>
   );
 }

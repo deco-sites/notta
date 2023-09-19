@@ -21,6 +21,10 @@ export interface Props {
   title?: string;
   description?: string;
   /**
+   * @description Instagram user.
+   */
+  instagramUser?:string;
+  /**
    * @description Get it in Facebook app. Expires every 90 days.
    * @format textarea
    */
@@ -78,6 +82,7 @@ export default function InstagramPosts({
         alignment={layout?.headerAlignment || "center"}
       />
       <div class="hidden lg:grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4 lg:grid-cols-5 lg:grid-cols-6">
+
       </div>
       <div
         class={`grid grid-cols-2 lg:grid-cols-${

@@ -1,12 +1,12 @@
 import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
 import Header from "$store/components/ui/SectionHeader.tsx";
-
+import type { ImageWidget } from "apps/admin/widgets.ts";
 export interface Props {
   title?: string;
   description?: string;
   benefits?: Array<{
     label: string;
-    icon: AvailableIcons;
+    icon: ImageWidget;
     description: string;
   }>;
   layout?: {
@@ -14,7 +14,9 @@ export interface Props {
     headerAlignment?: "center" | "left";
   };
 }
-
+ const viewWidth = window.screen
+ console.log(viewWidth);
+ 
 export default function Benefits(
   props: Props,
 ) {
@@ -23,22 +25,26 @@ export default function Benefits(
     description = "",
     benefits = [{
       icon: "Truck",
-      label: "Entrega em todo Brasil",
-      description: "Consulte o prazo no fechamento da compra.",
+      label: "Frete Grátis",
+      description: "Lorem Ipsum Dolor Sit Amet, consectur adipiscing elit.",
     }, {
       icon: "Discount",
-      label: "15% na primeira compra",
-      description: "Aplicado direto na sacola de compras.",
+      label: "Feito a mão",
+      description: "Lorem Ipsum Dolor Sit Amet, consectur adipiscing elit.",
     }, {
       icon: "ArrowsPointingOut",
-      label: "Devolução grátis",
-      description: "Veja as condições para devolver seu produto.",
+      label: "Compra Segura",
+      description: "Lorem Ipsum Dolor Sit Amet, consectur adipiscing elit.",
+    },
+    {
+      icon: "ArrowsPointingOut",
+      label: "Embalagens Customizadas",
+      description: "Lorem Ipsum Dolor Sit Amet, consectur adipiscing elit.",
     }],
     layout,
   } = props;
 
   const listOfBenefits = benefits.map((benefit, index) => {
-    const showDivider = index < benefits.length - 1;
     const reverse = layout?.variation === "Color reverse";
     const benefitLayout = !layout?.variation || layout?.variation === "Simple"
       ? "tiled"
@@ -46,26 +52,20 @@ export default function Benefits(
 
     return (
       <div
-        class={`${
+        class={` col-span-1 ${
           reverse ? "bg-primary text-primary-content p-4 lg:px-8 lg:py-4" : ""
-        } flex gap-4 ${
+        } flex gap-4 items-center ${
           benefitLayout == "piledup" ? "flex-col items-center text-center" : ""
-        } ${
-          showDivider && benefitLayout !== "piledup"
-            ? "border-b border-neutral-300"
-            : ""
-        } ${showDivider ? "pb-4 lg:pr-8 lg:border-r lg:border-b-0" : ""} ${
-          showDivider && !reverse ? "lg:pb-0" : ""
+        }  ${
+          !reverse ? "lg:pb-0" : ""
         }`}
       >
         <div class="flex-none">
-          <Icon
-            id={benefit.icon}
+          <img
+            src={benefit.icon}
             class={reverse ? "text-base-100" : "text-primary"}
-            width={36}
-            height={36}
-            strokeWidth={0.01}
-            fill="currentColor"
+            width={48}
+            height={48}
           />
         </div>
         <div class="flex-auto flex flex-col gap-1 lg:gap-2">
@@ -128,7 +128,7 @@ export default function Benefits(
             alignment={layout?.headerAlignment || "center"}
           />
           <div class="w-full flex justify-center">
-            <div class="grid grid-cols-2 gap-4 w-full lg:gap-8 lg:grid-flow-col lg:auto-cols-fr">
+            <div class="grid grid-cols-4 gap-4 w-full lg:gap-8 ">
               {listOfBenefits}
             </div>
           </div>
