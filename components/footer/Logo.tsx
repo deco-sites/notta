@@ -7,6 +7,11 @@ export interface Props {
   };
 }
 
+const teste = () => {
+  console.log( "teste");
+  
+}
+
 export default function Logo({ logo }: Props) {
   return (
     <>
