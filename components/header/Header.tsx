@@ -68,7 +68,7 @@ function Header({
           searchbar={searchbar}
           platform={platform}
         >
-          <div class="bg-base-100 fixed w-full z-50">
+          <div class="bg-base-100 fixed w-full z-50 bg-transparent">
             <Alert alerts={alerts} />
             <Navbar items={navItems} searchbar={searchbar} logo={logo} />
           </div>
