@@ -19,28 +19,45 @@ function Navbar({ items, searchbar, logo }: {
 }) {
   const platform = usePlatform();
 
+  const backgroundLinear = {
+    filter: "blur(1px)",
+  };
+
   return (
     <>
       {/* Mobile Version */}
       <div
-        style={{ height: navbarHeight }}
-        class="md:hidden flex flex-row justify-between items-center border-b border-base-200 w-full pl-2 pr-6 gap-2"
+        style={{
+          height: navbarHeight,
+          // background: backgroundLinear.background,
+          backdropFilter: backgroundLinear.filter,
+        }}
+        class="md:hidden flex flex-row justify-between items-center w-full px-4 gap-2 bg-gradient-to-b from-[#000000c5] to-transparent pt-6 pb-12"
       >
-        <MenuButton />
+        <div>
+          <MenuButton />
+          <SearchButton />
+        </div>
 
         {logo && (
           <a
             href="/"
-            class="flex-grow inline-flex items-center"
+            class="inline-flex items-center"
             style={{ minHeight: navbarHeight }}
             aria-label="Store logo"
           >
-            <Image src={logo.src} alt={logo.alt} width={126} height={16} />
+            <Image src={logo.src} alt={logo.alt} width={94} height={28} />
           </a>
         )}
 
         <div class="flex gap-1">
-          <SearchButton />
+          <a
+            class="btn btn-circle btn-sm btn-ghost"
+            href="/login"
+            aria-label="Log in"
+          >
+            <Icon id="User" size={24} strokeWidth={1.1} />
+          </a>
           {platform === "vtex" && <CartButtonVTEX />}
           {platform === "vnda" && <CartButtonVDNA />}
         </div>
