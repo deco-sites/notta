@@ -67,14 +67,14 @@ function CartItem(
       <Image
         {...image}
         style={{ aspectRatio: "108 / 150" }}
-        width={108}
-        height={150}
-        class="h-full object-contain"
+        width={85}
+        height={127}
+        class="h-full object-contain rounded"
       />
 
       <div class="flex flex-col gap-2">
         <div class="flex justify-between items-center">
-          <span>{name}</span>
+          <span class="text-black font-bold text-sm ">{name}</span>
           <Button
             disabled={loading || isGift}
             loading={loading}

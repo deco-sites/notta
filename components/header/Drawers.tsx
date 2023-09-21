@@ -29,13 +29,13 @@ const Aside = (
     children: ComponentChildren;
   },
 ) => (
-  <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full divide-y max-w-[100vw]">
-    <div class="flex justify-between items-center">
-      <h1 class="px-4 py-3">
+  <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full max-w-[100vw]">
+    <div class="flex justify-between items-center mx-6 pb-5 py-6 border-b-[1px] border-[#F1F1F1]">
+      <h1 class="">
         <span class="font-medium text-2xl">{title}</span>
       </h1>
       {onClose && (
-        <Button class="btn btn-ghost" onClick={onClose}>
+        <Button class="btn btn-ghost p-0" onClick={onClose}>
           <Icon id="XMark" size={24} strokeWidth={2} />
         </Button>
       )}
@@ -81,7 +81,7 @@ function Drawers({ menu, searchbar, children, platform }: Props) {
         onClose={() => displayCart.value = false}
         aside={
           <Aside
-            title="Minha sacola"
+            title="Sacola"
             onClose={() => displayCart.value = false}
           >
             <Cart platform={platform} />

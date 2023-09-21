@@ -62,16 +62,6 @@ function Cart({
         )
         : (
           <>
-            {/* Free Shipping Bar */}
-            <div class="px-2 py-4 w-full">
-              <FreeShippingProgressBar
-                total={total}
-                locale={locale}
-                currency={currency}
-                target={freeShippingTarget}
-              />
-            </div>
-
             {/* Cart Items */}
             <ul
               role="list"
@@ -91,10 +81,20 @@ function Cart({
               ))}
             </ul>
 
+            {/* Free Shipping Bar */}
+            <div class="px-2 py-4 w-full">
+              <FreeShippingProgressBar
+                total={total}
+                locale={locale}
+                currency={currency}
+                target={freeShippingTarget}
+              />
+            </div>
+
             {/* Cart Footer */}
             <footer class="w-full">
               {/* Subtotal */}
-              <div class="border-t border-base-200 py-2 flex flex-col">
+              <div class="py-2 flex flex-col">
                 {discounts > 0 && (
                   <div class="flex justify-between items-center px-4">
                     <span class="text-sm">Descontos</span>
@@ -104,18 +104,22 @@ function Cart({
                   </div>
                 )}
                 <div class="w-full flex justify-between px-4 text-sm">
-                  <span>Subtotal</span>
-                  <span class="px-4">
+                  <span class="text-xs text-[#616E7C] font-normal font-[Helvetica]">
+                    Subtotal
+                  </span>
+                  <span class="px-4 text-sm text-[#616E7C] font-bold font-[Helvetica]">
                     {formatPrice(subtotal, currency, locale)}
                   </span>
                 </div>
-                <Coupon onAddCoupon={onAddCoupon} coupon={coupon} />
+                {/* <Coupon onAddCoupon={onAddCoupon} coupon={coupon} /> */}
               </div>
 
               {/* Total */}
-              <div class="border-t border-base-200 pt-4 flex flex-col justify-end items-end gap-2 mx-4">
+              <div class="pt-4 flex flex-col justify-end items-end gap-2 mx-4">
                 <div class="flex justify-between items-center w-full">
-                  <span>Total</span>
+                  <span class="text-xs text-[#616E7C] font-normal font-[Helvetica]">
+                    Total
+                  </span>
                   <span class="font-medium text-xl">
                     {formatPrice(total, currency, locale)}
                   </span>
