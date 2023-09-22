@@ -1,7 +1,9 @@
 import Header from "$store/components/ui/SectionHeader.tsx";
 
 export interface Form {
-  placeholder?: string;
+  placeholderEmail?: string;
+  placeholderName?: string;
+  placeholderBirthDate?: string;
   buttonText?: string;
   /** @format html */
   helpText?: string;
@@ -26,7 +28,9 @@ const DEFAULT_PROPS: Props = {
   title: "",
   description: "",
   form: {
-    placeholder: "Digite seu email",
+    placeholderEmail: "Digite seu email",
+    placeholderName: "Digite seu Nome",
+    placeholderBirthDate: "Digite seu Aniversário",
     buttonText: "Inscrever",
     helpText:
       'Ao se inscrever, você concorda com nossa <a class="link" href="/politica-de-privacidade">Política de privacidade</a>.',
@@ -56,26 +60,40 @@ export default function Newsletter(props: Props) {
   );
 
   const formLayout = form && (
-    <form action="/" class="flex flex-col gap-4">
+    <form action="/" class="flex flex-col gap-4 items-center justify-center">
       <div class="flex flex-col lg:flex-row gap-3">
         <input
           class="input input-bordered lg:w-80"
           type="text"
-          placeholder={form.placeholder}
+          placeholder={form.placeholderName}
         />
-        <button
-          class={`btn ${isReverse ? "btn-accent" : ""}`}
-          type="submit"
-        >
-          {form.buttonText}
-        </button>
+        <input
+          class="input input-bordered lg:w-80"
+          type="text"
+          placeholder={form.placeholderEmail}
+        />
+        <input
+          class="input input-bordered lg:w-80"
+          type="text"
+          placeholder={form.placeholderBirthDate}
+        />
+        
       </div>
-      {form.helpText && (
+      <div class="flex flex-col justify-center items-center">
+        <button
+            class={`btn ${isReverse ? "btn-accent" : ""}`}
+            type="submit"
+          >
+            {form.buttonText}
+          </button>
+          {form.helpText && (
         <div
           class="text-sm"
           dangerouslySetInnerHTML={{ __html: form.helpText }}
         />
-      )}
+        )}
+      </div>
+    
     </form>
   );
 
@@ -114,7 +132,7 @@ export default function Newsletter(props: Props) {
       )}
       {layout?.content?.alignment === "Side to side" && (
         <div
-          class={`container flex flex-col rounded justify-between lg:flex-row p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
+          class={`container flex flex-col rounded justify-between  p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
         >
           {headerLayout}
           <div class="flex justify-center">

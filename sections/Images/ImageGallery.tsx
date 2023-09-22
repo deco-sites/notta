@@ -8,6 +8,7 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 export interface Banner {
   srcMobile: ImageWidget;
   srcDesktop?: ImageWidget;
+
   /**
    * @description Image alt text
    */
@@ -16,6 +17,14 @@ export interface Banner {
    * @description Adicione um link
    */
   href: string;
+  action?: {
+    /** @description title for the image */
+    title: string;
+    /** @description description for the image */
+    description?: string;
+    /** @description Button label */
+    label: string;
+  };
 }
 
 export type BorderRadius =
@@ -32,8 +41,8 @@ export interface Props {
   title?: string;
   description?: string;
   /**
-   * @maxItems 4
-   * @minItems 4
+   * @maxItems 3
+   * @minItems 3
    */
   banners?: Banner[];
   layout?: {
@@ -84,6 +93,11 @@ const DEFAULT_PROPS: Props = {
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/a8ba1db7-3e23-47e5-83ac-43dfbd2413fd",
       "alt": "capi",
       "href": "/capibara",
+      "action":{
+        "title": "PÉROLAS EM ALTA",
+        "description": "A nova coleção cuidadosamente selecionada de joias deslumbrantes, projetadas para mulheres que desejam destacar sua beleza única.",
+        "label": "Confira"
+      }
     },
     {
       "alt": "Capybara",
@@ -92,6 +106,10 @@ const DEFAULT_PROPS: Props = {
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/cabc6f7d-7f9b-4f37-9ed7-3ebe840f4087",
       "srcDesktop":
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/9704ea7e-1810-4f3c-bd17-00e755022e57",
+        "action":{
+          "title": "PÉROLAS EM ALTA",
+          "label": "Confira"
+        }
     },
     {
       "srcMobile":
@@ -100,15 +118,11 @@ const DEFAULT_PROPS: Props = {
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/18e739cc-31d3-4e5a-9d24-abd4a39697c2",
       "href": "https://en.wikipedia.org/wiki/Capybara",
       "alt": "Capybara",
-    },
-    {
-      "srcMobile":
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/86de29ff-9bee-4051-960d-14a72f346b9e",
-      "srcDesktop":
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/92fa4c80-5eac-462e-abb6-f2e91fac7de6",
-      "alt": "Capybara",
-      "href": "https://en.wikipedia.org/wiki/Capybara",
-    },
+      "action":{
+        "title": "PÉROLAS EM ALTA",
+        "label": "Confira"
+      }
+    }
   ],
   "layout": {
     "borderRadius": {
@@ -129,41 +143,74 @@ function Banner(
       /** @default none */
       desktop?: BorderRadius;
     };
+    classes?: string;
   },
 ) {
-  const { borderRadius, srcMobile, srcDesktop, alt } = props;
+  const { borderRadius, srcMobile, srcDesktop, alt ,href} = props;
+  const {action} = props;
   const radiusDesktop = RADIUS.desktop[borderRadius?.desktop ?? "none"];
   const radiusMobile = RADIUS.mobile[borderRadius?.desktop ?? "none"];
 
   return (
-    <a
-      href={props.href}
-      class={`overflow-hidden ${radiusDesktop} ${radiusMobile}`}
+    <div
+      
+      class={`overflow-hidden ${radiusDesktop} ${radiusMobile} relative`}
     >
-      <Picture>
-        <Source
-          width={190}
-          height={190}
-          media="(max-width: 767px)"
-          src={srcMobile}
-        />
-        <Source
-          width={640}
-          height={420}
-          media="(min-width: 768px)"
-          src={srcDesktop || srcMobile}
-        />
-        <img
-          class="w-full h-full object-cover"
-          src={srcMobile}
-          alt={alt}
-          decoding="async"
-          loading="lazy"
-        />
-      </Picture>
-    </a>
+          <CardText
+        tag={action?.title}
+        label={action?.label}
+        classes="absolute bottom-8 left-4 z-10 max-w-[80%] md:max-w-[30%]"
+        description={action?.description}
+        href={href}
+      />
+      <a href={props.href}>
+        <Picture>
+            <Source
+              width={190}
+              height={190}
+              media="(max-width: 767px)"
+              src={srcMobile}
+            />
+            <Source
+              width={640}
+              height={420}
+              media="(min-width: 768px)"
+              src={srcDesktop || srcMobile}
+            />
+            <img
+              class="w-full h-full object-cover"
+              src={srcMobile}
+              alt={alt}
+              decoding="async"
+              loading="lazy"
+            />
+        </Picture>
+      </a>
+    </div>
   );
 }
+
+function CardText(
+  { tag, label, description, alignment, classes,href }: {
+    tag?: string;
+    href?: string;
+    label?: string;
+    classes?: string;
+    description?: string;
+    alignment?: "center" | "left";
+  },
+) {
+  return (
+    <div
+      class={`flex flex-col gap-3  ${classes}`}
+    >
+      {tag && <h3 class="text-2xl font-bold text-white uppercase">{tag}</h3>}
+      {description && <p class="text-sm text-white">{description}</p>}
+      {href && label && <a class={"btn bg-white text-[#434A1B] rounded-none transition duration-300 ease-in-out hover:bg-black hover:text-white border-none px-6 max-w-[148px] py-3"} href={href}>{label}</a>}
+    </div>
+  );
+}
+
 
 export default function Gallery(props: Props) {
   const { title, description, banners, layout } = {
@@ -186,19 +233,26 @@ export default function Gallery(props: Props) {
       : "sm:row-span-2";
 
   return (
-    <section class="container px-4 py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 lg:px-0">
-      <Header
-        title={title}
-        description={description}
-        alignment={layout?.headerAlignment || "center"}
-      />
-      <ul class="grid grid-flow-col grid-cols-2 grid-rows-6 gap-4 list-none">
-        {banners?.map((banner, index) => (
-          <li class={`${mobileItemLayout(index)} ${desktopItemLayout(index)}`}>
-            <Banner {...banner} borderRadius={props.layout?.borderRadius} />
-          </li>
-        ))}
-      </ul>
+    <section class="container max-w-full  py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 px-0">
+      {
+        banners?.length == 3?
+          <ul class="flex flex-wrap gap-2 md:grid md:grid-cols-2">
+            {banners?.map((banner, index) => (
+              <li class={`${index == 0 ? 'col-span-2 h-auto' : 'col-span-1 h-auto relative' }`}>
+                <Banner {...banner} borderRadius={props.layout?.borderRadius} />
+              </li>
+            ))}
+          </ul> 
+          :
+          <ul class="grid grid-flow-col grid-cols-2 grid-rows-6 gap-4 list-none">
+            {banners?.map((banner, index) => (
+              <li class={`${mobileItemLayout(index)} ${desktopItemLayout(index)} relative`}>
+                <Banner {...banner} borderRadius={props.layout?.borderRadius} />
+              </li>
+            ))}
+          </ul>
+          
+      }
     </section>
   );
 }
