@@ -24,7 +24,6 @@ interface Props {
   onUpdateQuantity: ItemProps["onUpdateQuantity"];
   itemToAnalyticsItem: ItemProps["itemToAnalyticsItem"];
   onClose?: () => void;
-  imageBag: ImageWidget;
 }
 
 function Cart({
@@ -44,6 +43,7 @@ function Cart({
 }: Props) {
   const { displayCart } = useUI();
   const isEmtpy = items.length === 0;
+  console.log(displayCart.value);
 
   return (
     <div

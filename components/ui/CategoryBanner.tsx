@@ -30,7 +30,7 @@ function Banner({ banner }: SectionProps<ReturnType<typeof loader>>) {
   const { title, subtitle, image } = banner;
 
   return (
-    <div class="grid grid-cols-1 grid-rows-1">
+    <div class="grid grid-cols-1 grid-rows-1 teste">
       <Picture preload class="col-start-1 col-span-1 row-start-1 row-span-1">
         <Source
           src={image.mobile}

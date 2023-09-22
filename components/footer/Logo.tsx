@@ -7,6 +7,7 @@ export interface Props {
   };
 }
 
+
 export default function Logo({ logo }: Props) {
   return (
     <>
