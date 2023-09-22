@@ -22,8 +22,7 @@ export interface Props {
   };
   cardLayout?: cardLayout;
 }
-
-function ProductShelf({
+ function ProductShelf({
   products,
   title,
   description,
@@ -36,7 +35,6 @@ function ProductShelf({
   if (!products || products.length === 0) {
     return null;
   }
-
   return (
     <div class="w-full container  py-8 flex flex-col gap-12 lg:gap-16 lg:py-10">
       <Header

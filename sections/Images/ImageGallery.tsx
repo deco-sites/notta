@@ -41,8 +41,8 @@ export interface Props {
   title?: string;
   description?: string;
   /**
-   * @maxItems 4
-   * @minItems 4
+   * @maxItems 3
+   * @minItems 3
    */
   banners?: Banner[];
   layout?: {

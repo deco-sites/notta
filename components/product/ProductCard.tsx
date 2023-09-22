@@ -5,6 +5,7 @@ import { formatPrice } from "$store/sdk/format.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
+import AddToCartButtonVTEX from "$store/islands/AddToCartButton/vtex.tsx";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
@@ -63,16 +64,21 @@ function ProductCard(
   const {
     url,
     productID,
-    name,
+    name = "",
     image: images,
     offers,
     isVariantOf,
   } = product;
   const id = `product-card-${productID}`;
-  const productGroupID = isVariantOf?.productGroupID;
+  const productGroupID = isVariantOf?.productGroupID ?? "";
   const [front, back] = images ?? [];
-  const { listPrice, price, installments } = useOffer(offers);
+  const { listPrice, 
+    price = 0, 
+    installments,
+    seller = "1",
+   } = useOffer(offers);
   const possibilities = useVariantPossibilities(product);
+  const discount = price && listPrice ? listPrice - price : 0;
   const variants = Object.entries(Object.values(possibilities)[0] ?? {});
 
   const l = layout;
@@ -297,7 +303,14 @@ function ProductCard(
                 l?.onMouseOver?.showCta ? "lg:hidden" : ""
               }`}
             >
-              {cta}
+              <AddToCartButtonVTEX
+                    name={name}
+                    productID={productID}
+                    productGroupID={productGroupID}
+                    price={price}
+                    discount={discount}
+                    seller={seller}
+                  />
             </div>
           )
           : ""}

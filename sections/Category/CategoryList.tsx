@@ -14,6 +14,10 @@ export interface Category {
 }
 
 export interface Props {
+  /**
+   * @maxItems 4
+   * @minItems 4
+   */
   list?: Category[];
   layout?: {
     headerAlignment?: "center" | "left";
