@@ -10,7 +10,7 @@ import Image from "apps/website/components/Image.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import type { INavItem } from "./NavItem.tsx";
 import NavItem from "./NavItem.tsx";
-import { navbarHeight } from "./constants.ts";
+import { headerHeightDesktop, headerHeightMobile } from "./constants.ts";
 
 function Navbar({ items, searchbar, logo }: {
   items: INavItem[];
@@ -19,21 +19,10 @@ function Navbar({ items, searchbar, logo }: {
 }) {
   const platform = usePlatform();
 
-  const backgroundLinear = {
-    filter: "blur(1px)",
-  };
-
   return (
     <>
       {/* Mobile Version */}
-      <div
-        style={{
-          height: navbarHeight,
-          // background: backgroundLinear.background,
-          backdropFilter: backgroundLinear.filter,
-        }}
-        class="md:hidden flex flex-row justify-between items-center w-full px-4 gap-2 bg-gradient-to-b from-[#000000c5] to-transparent pt-6 pb-12"
-      >
+      <div class="md:hidden flex flex-row justify-between items-center w-full px-4 gap-2 bg-gradient-to-b from-[#000000c5] to-transparent backdrop-blur-[1px] pt-6 pb-12">
         <div>
           <MenuButton />
           <SearchButton />
@@ -43,7 +32,7 @@ function Navbar({ items, searchbar, logo }: {
           <a
             href="/"
             class="inline-flex items-center"
-            style={{ minHeight: navbarHeight }}
+            style={{ minHeight: headerHeightMobile }}
             aria-label="Store logo"
           >
             <Image src={logo.src} alt={logo.alt} width={94} height={28} />
@@ -64,7 +53,7 @@ function Navbar({ items, searchbar, logo }: {
       </div>
 
       {/* Desktop Version */}
-      <div class="hidden md:flex flex-row justify-between items-center border-b border-base-200 w-full pl-2 pr-6 bg-gray-500">
+      <div class="hidden md:flex flex-row justify-between items-centerbg-gradient-to-b from-[#000000c5] to-transparent backdrop-blur-[1px] pt-6 pb-12">
         <div class="flex justify-center">
           {items.map((item) => <NavItem item={item} />)}
         </div>
