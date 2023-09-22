@@ -6,6 +6,8 @@ import { AnalyticsItem } from "apps/commerce/types.ts";
 import CartItem, { Item, Props as ItemProps } from "./CartItem.tsx";
 import Coupon, { Props as CouponProps } from "./Coupon.tsx";
 import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";
+import type { ImageWidget } from "apps/admin/widgets.ts";
+import { asset } from "$fresh/runtime.ts";
 
 interface Props {
   items: Item[];
@@ -50,15 +52,25 @@ function Cart({
     >
       {isEmtpy
         ? (
-          <div class="flex flex-col gap-6">
-            <span class="font-medium text-2xl">Sua sacola está vazia</span>
+          <div class="flex flex-col gap-6 items-center mb-40">
+            <div>
+              <img
+                height={86}
+                width={86}
+                src="/image/bag-dark.png"
+                alt="Image Bag"
+              />
+            </div>
+            <span class="font-normal text-base text-black font-[Helvetica]">
+              Sua sacola está vazia.
+            </span>
             <Button
-              class="btn-outline"
+              class="btn-outline bg-black font-[Helvetica] w-48 text-white font-normal "
               onClick={() => {
                 displayCart.value = false;
               }}
             >
-              Escolher produtos
+              Continuar Comprando
             </Button>
           </div>
         )

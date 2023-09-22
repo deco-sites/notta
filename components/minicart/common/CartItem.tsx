@@ -57,6 +57,7 @@ function CartItem(
     [],
   );
 
+  console.log(item);
   return (
     <div
       class="grid grid-rows-1 gap-4 mx-3 border-b pb-4"
@@ -85,42 +86,48 @@ function CartItem(
           </span>
         </div>
         <div class="flex justify-between">
-          <QuantitySelector
-            disabled={loading || isGift}
-            quantity={quantity}
-            onChange={withLoading(async (quantity) => {
-              const analyticsItem = itemToAnalyticsItem(index);
-              const diff = quantity - item.quantity;
+          {!isGift &&
+            (
+              <>
+                <QuantitySelector
+                  disabled={loading || isGift}
+                  quantity={quantity}
+                  onChange={withLoading(async (quantity) => {
+                    const analyticsItem = itemToAnalyticsItem(index);
+                    const diff = quantity - item.quantity;
 
-              await onUpdateQuantity(quantity, index);
+                    await onUpdateQuantity(quantity, index);
 
-              if (analyticsItem) {
-                analyticsItem.quantity = diff;
+                    if (analyticsItem) {
+                      analyticsItem.quantity = diff;
 
-                sendEvent({
-                  name: diff < 0 ? "remove_from_cart" : "add_to_cart",
-                  params: { items: [analyticsItem] },
-                });
-              }
-            })}
-          />
-          <Button
-            disabled={loading || isGift}
-            loading={loading}
-            class="underline bg-transparent text-[#7B8794] font-[Helvetica] text-xs border-none"
-            onClick={withLoading(async () => {
-              const analyticsItem = itemToAnalyticsItem(index);
+                      sendEvent({
+                        name: diff < 0 ? "remove_from_cart" : "add_to_cart",
+                        params: { items: [analyticsItem] },
+                      });
+                    }
+                  })}
+                />
 
-              await onUpdateQuantity(0, index);
+                <Button
+                  disabled={loading || isGift}
+                  loading={loading}
+                  class="underline bg-transparent text-[#7B8794] font-[Helvetica] text-xs border-none"
+                  onClick={withLoading(async () => {
+                    const analyticsItem = itemToAnalyticsItem(index);
 
-              analyticsItem && sendEvent({
-                name: "remove_from_cart",
-                params: { items: [analyticsItem] },
-              });
-            })}
-          >
-            REMOVER
-          </Button>
+                    await onUpdateQuantity(0, index);
+
+                    analyticsItem && sendEvent({
+                      name: "remove_from_cart",
+                      params: { items: [analyticsItem] },
+                    });
+                  })}
+                >
+                  REMOVER
+                </Button>
+              </>
+            )}
         </div>
       </div>
     </div>
