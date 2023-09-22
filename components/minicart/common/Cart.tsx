@@ -6,6 +6,8 @@ import { AnalyticsItem } from "apps/commerce/types.ts";
 import CartItem, { Item, Props as ItemProps } from "./CartItem.tsx";
 import Coupon, { Props as CouponProps } from "./Coupon.tsx";
 import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";
+import type { ImageWidget } from "apps/admin/widgets.ts";
+import { asset } from "$fresh/runtime.ts";
 
 interface Props {
   items: Item[];
@@ -21,6 +23,8 @@ interface Props {
   onAddCoupon: CouponProps["onAddCoupon"];
   onUpdateQuantity: ItemProps["onUpdateQuantity"];
   itemToAnalyticsItem: ItemProps["itemToAnalyticsItem"];
+  onClose?: () => void;
+  imageBag: ImageWidget;
 }
 
 function Cart({
@@ -48,15 +52,25 @@ function Cart({
     >
       {isEmtpy
         ? (
-          <div class="flex flex-col gap-6">
-            <span class="font-medium text-2xl">Sua sacola está vazia</span>
+          <div class="flex flex-col gap-6 items-center mb-40">
+            <div>
+              <img
+                height={86}
+                width={86}
+                src="/image/bag-dark.png"
+                alt="Image Bag"
+              />
+            </div>
+            <span class="font-normal text-base text-black font-[Helvetica]">
+              Sua sacola está vazia.
+            </span>
             <Button
-              class="btn-outline"
+              class="btn-outline bg-black font-[Helvetica] w-48 text-white font-normal "
               onClick={() => {
                 displayCart.value = false;
               }}
             >
-              Escolher produtos
+              Continuar Comprando
             </Button>
           </div>
         )
@@ -103,11 +117,11 @@ function Cart({
                     </span>
                   </div>
                 )}
-                <div class="w-full flex justify-between px-4 text-sm">
+                <div class="w-full flex justify-between text-sm px-4">
                   <span class="text-xs text-[#616E7C] font-normal font-[Helvetica]">
                     Subtotal
                   </span>
-                  <span class="px-4 text-sm text-[#616E7C] font-bold font-[Helvetica]">
+                  <span class="text-sm text-[#616E7C] font-bold font-[Helvetica]">
                     {formatPrice(subtotal, currency, locale)}
                   </span>
                 </div>
@@ -116,24 +130,26 @@ function Cart({
 
               {/* Total */}
               <div class="pt-4 flex flex-col justify-end items-end gap-2 mx-4">
-                <div class="flex justify-between items-center w-full">
-                  <span class="text-xs text-[#616E7C] font-normal font-[Helvetica]">
+                <div class="flex justify-between items-center w-full text-base text-[#1C1C1E] font-bold font-[Helvetica]">
+                  <span class="">
                     Total
                   </span>
-                  <span class="font-medium text-xl">
+                  <span>
                     {formatPrice(total, currency, locale)}
                   </span>
                 </div>
-                <span class="text-sm text-base-300">
+                {
+                  /* <span class="text-sm text-base-300">
                   Taxas e fretes serão calculados no checkout
-                </span>
+                </span> */
+                }
               </div>
 
-              <div class="p-4">
+              <div class="flex flex-col p-4 gap-4 ">
                 <a class="inline-block w-full" href={checkoutHref}>
                   <Button
                     data-deco="buy-button"
-                    class="btn-primary btn-block"
+                    class="bg-black text-white font-normal font-[Helvetica] w-full rounded"
                     disabled={loading || isEmtpy}
                     onClick={() => {
                       sendEvent({
@@ -149,9 +165,17 @@ function Cart({
                       });
                     }}
                   >
-                    Fechar pedido
+                    Finalizar compra
                   </Button>
                 </a>
+                <button
+                  class="text-sm text-black font-normal font-[Helvetica] px-6 py-3 flex justify-center items-center"
+                  onClick={() => {
+                    displayCart.value = false;
+                  }}
+                >
+                  Continuar comprando
+                </button>
               </div>
             </footer>
           </>

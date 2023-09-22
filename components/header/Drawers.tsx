@@ -32,7 +32,9 @@ const Aside = (
   <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full max-w-[100vw]">
     <div class="flex justify-between items-center mx-6 pb-5 py-6 border-b-[1px] border-[#F1F1F1]">
       <h1 class="">
-        <span class="font-medium text-2xl">{title}</span>
+        <span class="font-normal text-2xl text-[#1C1C1E] font-[Helvetica]">
+          {title}
+        </span>
       </h1>
       {onClose && (
         <Button class="btn btn-ghost p-0" onClick={onClose}>
