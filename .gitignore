@@ -72,3 +72,4 @@ deno.lock
 
 # db files
 .config.json
+tailwind.config.js

@@ -4,7 +4,7 @@ import type { Product, Suggestion } from "apps/commerce/types.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Alert from "./Alert.tsx";
 import Navbar from "./Navbar.tsx";
-import { headerHeight } from "./constants.ts";
+import { headerHeightMobile } from "./constants.ts";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 
 export interface NavItem {
@@ -62,7 +62,7 @@ function Header({
 
   return (
     <>
-      <header style={{ height: headerHeight }}>
+      <header style={{ height: headerHeightMobile }}>
         <Drawers
           menu={{ items: navItems }}
           searchbar={searchbar}
