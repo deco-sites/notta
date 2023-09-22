@@ -52,7 +52,7 @@ function Cart({
     >
       {isEmtpy
         ? (
-          <div class="flex flex-col gap-6 items-center">
+          <div class="flex flex-col gap-6 items-center mb-40">
             <div>
               <img
                 height={86}
