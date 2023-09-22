@@ -59,7 +59,7 @@ function CartItem(
 
   return (
     <div
-      class="grid grid-rows-1 gap-2"
+      class="grid grid-rows-1 gap-4 mx-3 border-b pb-4"
       style={{
         gridTemplateColumns: "auto 1fr",
       }}
@@ -72,13 +72,42 @@ function CartItem(
         class="h-full object-contain rounded"
       />
 
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-3">
         <div class="flex justify-between items-center">
           <span class="text-black font-bold text-sm ">{name}</span>
+        </div>
+        <div class="flex gap-1 flex-col">
+          <span class="line-through text-base-300 text-xs font-bold">
+            {formatPrice(list, currency, locale)}
+          </span>
+          <span class="text-sm font-[Helvetica] text-[#363636] font-bold">
+            {isGift ? "Grátis" : formatPrice(sale, currency, locale)}
+          </span>
+        </div>
+        <div class="flex justify-between">
+          <QuantitySelector
+            disabled={loading || isGift}
+            quantity={quantity}
+            onChange={withLoading(async (quantity) => {
+              const analyticsItem = itemToAnalyticsItem(index);
+              const diff = quantity - item.quantity;
+
+              await onUpdateQuantity(quantity, index);
+
+              if (analyticsItem) {
+                analyticsItem.quantity = diff;
+
+                sendEvent({
+                  name: diff < 0 ? "remove_from_cart" : "add_to_cart",
+                  params: { items: [analyticsItem] },
+                });
+              }
+            })}
+          />
           <Button
             disabled={loading || isGift}
             loading={loading}
-            class="btn-ghost btn-square"
+            class="underline bg-transparent text-[#7B8794] font-[Helvetica] text-xs border-none"
             onClick={withLoading(async () => {
               const analyticsItem = itemToAnalyticsItem(index);
 
@@ -90,37 +119,9 @@ function CartItem(
               });
             })}
           >
-            <Icon id="Trash" size={24} />
+            REMOVER
           </Button>
         </div>
-        <div class="flex items-center gap-2">
-          <span class="line-through text-base-300 text-sm">
-            {formatPrice(list, currency, locale)}
-          </span>
-          <span class="text-sm text-secondary">
-            {isGift ? "Grátis" : formatPrice(sale, currency, locale)}
-          </span>
-        </div>
-
-        <QuantitySelector
-          disabled={loading || isGift}
-          quantity={quantity}
-          onChange={withLoading(async (quantity) => {
-            const analyticsItem = itemToAnalyticsItem(index);
-            const diff = quantity - item.quantity;
-
-            await onUpdateQuantity(quantity, index);
-
-            if (analyticsItem) {
-              analyticsItem.quantity = diff;
-
-              sendEvent({
-                name: diff < 0 ? "remove_from_cart" : "add_to_cart",
-                params: { items: [analyticsItem] },
-              });
-            }
-          })}
-        />
       </div>
     </div>
   );
