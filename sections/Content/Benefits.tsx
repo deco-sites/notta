@@ -15,7 +15,6 @@ export interface Props {
   };
 }
  const viewWidth = window.screen
- console.log(viewWidth);
  
 export default function Benefits(
   props: Props,

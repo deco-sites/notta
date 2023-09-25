@@ -5,7 +5,7 @@ import { formatPrice } from "$store/sdk/format.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
-import AddToCartButtonVTEX from "$store/islands/AddToCartButton/vtex.tsx";
+import AddToCartButtonVTEX from "$store/islands/AddToCartButton/Shelf/vtexShelf.tsx";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
@@ -55,8 +55,8 @@ const relative = (url: string) => {
   return `${link.pathname}${link.search}`;
 };
 
-const WIDTH = 200;
-const HEIGHT = 279;
+const WIDTH = 282;
+const HEIGHT = 353;
 
 function ProductCard(
   { product, preload, itemListName, layout, platform }: Props,
@@ -69,6 +69,8 @@ function ProductCard(
     offers,
     isVariantOf,
   } = product;
+
+  
   const id = `product-card-${productID}`;
   const productGroupID = isVariantOf?.productGroupID ?? "";
   const [front, back] = images ?? [];
@@ -109,7 +111,7 @@ function ProductCard(
   return (
     <div
       id={id}
-      class={`card card-compact group w-full ${
+      class={`card card-compact rounded-none  group w-full ${
         align === "center" ? "text-center" : "text-start"
       } ${l?.onMouseOver?.showCardShadow ? "lg:hover:card-bordered" : ""}
         ${
@@ -141,25 +143,35 @@ function ProductCard(
       >
         {/* Wishlist button */}
         <div
-          class={`absolute top-2 z-10
-          ${
-            l?.elementsPositions?.favoriteIcon === "Top left"
-              ? "left-2"
-              : "right-2"
-          }
-          ${
-            l?.onMouseOver?.showFavoriteIcon
-              ? "lg:hidden lg:group-hover:block"
-              : "lg:hidden"
-          }
-        `}
+          class={`absolute transition ease-in-out duration-300  justify-between flex lg:hidden items-center bottom-2 z-10 lg:group-hover:flex right-2 left-2`}
         >
+           {!l?.hide?.cta
+            ? (
+              <div
+                class={` flex items-end ${
+                  l?.onMouseOver?.showCta ? "lg:hidden" : ""
+                }`}
+              >
+                <AddToCartButtonVTEX
+                      name={name}
+                      productID={productID}
+                      productGroupID={productGroupID}
+                      price={price}
+                      discount={discount}
+                      seller={seller}
+                    />
+              </div>
+            )
+            : ""}
+
           {platform === "vtex" && (
             <WishlistButton
               productGroupID={productGroupID}
               productID={productID}
             />
           )}
+
+
         </div>
         {/* Product Images */}
         <a
@@ -172,7 +184,7 @@ function ProductCard(
             alt={front.alternateName}
             width={WIDTH}
             height={HEIGHT}
-            class={`bg-base-100 col-span-full row-span-full rounded w-full ${
+            class={`bg-base-100 col-span-full row-span-full  w-full ${
               l?.onMouseOver?.image == "Zoom image"
                 ? "duration-100 transition-scale scale-100 lg:group-hover:scale-125"
                 : ""
@@ -189,7 +201,7 @@ function ProductCard(
               alt={back?.alternateName ?? front.alternateName}
               width={WIDTH}
               height={HEIGHT}
-              class="bg-base-100 col-span-full row-span-full transition-opacity rounded w-full opacity-0 lg:group-hover:opacity-100"
+              class="bg-base-100 col-span-full row-span-full transition-opacity  w-full opacity-0 lg:group-hover:opacity-100"
               sizes="(max-width: 640px) 50vw, 20vw"
               loading="lazy"
               decoding="async"
@@ -214,14 +226,14 @@ function ProductCard(
         </figcaption>
       </figure>
       {/* Prices & Name */}
-      <div class="flex-auto flex flex-col p-2 gap-3 lg:gap-4">
+      <div class="flex-auto flex flex-col relative  gap-1 lg:gap-2">
         {/* SKU Selector */}
         {(!l?.elementsPositions?.skuSelector ||
           l?.elementsPositions?.skuSelector === "Top") && (
           <>
-            {l?.hide?.skuSelector ? "" : (
+            {l?.hide?.skuSelector && variants.length ?  "" : (
               <ul
-                class={`flex items-center gap-2 w-full overflow-auto p-3 ${
+                class={`flex items-center gap-2 w-full overflow-auto  ${
                   align === "center" ? "justify-center" : "justify-start"
                 } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
               >
@@ -238,16 +250,9 @@ function ProductCard(
               {l?.hide?.productName
                 ? ""
                 : (
-                  <h2 class="truncate text-base lg:text-lg text-base-content">
+                  <h2 class="truncate text-xs text-base-content">
                     {name}
                   </h2>
-                )}
-              {l?.hide?.productDescription
-                ? ""
-                : (
-                  <p class="truncate text-sm lg:text-sm text-neutral">
-                    {product.description}
-                  </p>
                 )}
             </div>
           )}
@@ -260,21 +265,22 @@ function ProductCard(
                   : ""
               } ${align === "center" ? "justify-center" : "justify-start"}`}
             >
-              <div
+              {/* List Price */}
+              {/* <div
                 class={`line-through text-base-300 text-xs ${
                   l?.basics?.oldPriceSize === "Normal" ? "lg:text-xl" : ""
                 }`}
               >
                 {formatPrice(listPrice, offers!.priceCurrency!)}
-              </div>
-              <div class="text-accent text-base lg:text-xl">
+              </div> */}
+              <div class=" text-xs text-black font-bold ">
                 {formatPrice(price, offers!.priceCurrency!)}
               </div>
             </div>
-            {l?.hide?.installments
+            {l?.hide?.installments && !installments
               ? ""
               : (
-                <div class="text-base-300 text-sm lg:text-base">
+                <div class="text-base-300 text-xs">
                   ou {installments}
                 </div>
               )}
@@ -296,24 +302,7 @@ function ProductCard(
           </>
         )}
 
-        {!l?.hide?.cta
-          ? (
-            <div
-              class={`flex-auto flex items-end ${
-                l?.onMouseOver?.showCta ? "lg:hidden" : ""
-              }`}
-            >
-              <AddToCartButtonVTEX
-                    name={name}
-                    productID={productID}
-                    productGroupID={productGroupID}
-                    price={price}
-                    discount={discount}
-                    seller={seller}
-                  />
-            </div>
-          )
-          : ""}
+        
       </div>
     </div>
   );
