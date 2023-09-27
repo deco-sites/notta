@@ -75,16 +75,16 @@ function CategoryList(props: Props) {
   return (
     <div
       id={id}
-      class="container lg:max-w-full py-2 flex flex-col gap-8 lg:gap-10 text-base-content px-2  lg:py-3 overflow-x-auto"
+      class="container lg:max-w-full py-1 flex flex-col gap-8 lg:gap-10 text-base-content lg:py-3 overflow-x-auto"
     >
-      <Container classes="grid grid-cols-4 gap-2 w-max md:w-full">
+      <Container classes="grid grid-cols-4 gap-1 w-max md:w-full">
         {list?.slice(0,4).map((
           { tag, label, description, href, image, buttonText },
           index,
         ) => (
           <Container
           key={index}
-            classes="flex flex-col gap-4 col-span-1 first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-0"
+            classes="flex flex-col gap-4 col-span-1 "
           >
             <a
               href={href}

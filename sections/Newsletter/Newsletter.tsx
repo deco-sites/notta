@@ -60,7 +60,7 @@ export default function Newsletter(props: Props) {
   );
 
   const formLayout = form && (
-    <form action="/" class="flex flex-col gap-4 items-center justify-center">
+    <form action="/" class="flex flex-col gap-6 items-center justify-center">
       <div class="flex flex-col lg:flex-row gap-3">
         <input
           class="input input-bordered lg:w-80"
@@ -79,16 +79,16 @@ export default function Newsletter(props: Props) {
         />
         
       </div>
-      <div class="flex flex-col justify-center items-center">
+      <div class="flex flex-col justify-center gap-4 items-center ">
         <button
-            class={`btn ${isReverse ? "btn-accent" : ""}`}
+            class={`btn ${isReverse ? "btn-accent" : "btn-primary bg-black transition duration-300 ease-in-out hover:bg-white font-normal text-white hover:text-black hover:border hover:border-black border-none rounded-none"}`}
             type="submit"
           >
             {form.buttonText}
           </button>
           {form.helpText && (
         <div
-          class="text-sm"
+          class="text-xs text-center"
           dangerouslySetInnerHTML={{ __html: form.helpText }}
         />
         )}

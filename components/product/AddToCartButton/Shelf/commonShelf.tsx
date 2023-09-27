@@ -2,6 +2,7 @@ import Button from "$store/components/ui/Button.tsx";
 import { sendEvent } from "$store/sdk/analytics.tsx";
 import { useUI } from "$store/sdk/useUI.ts";
 import { useState } from "preact/hooks";
+import Icon from "$store/components/ui/Icon.tsx"
 
 export interface Props {
   /** @description: sku name */
@@ -60,8 +61,14 @@ export default function AddToCartButton(props: Props) {
   const btnProps = useAddToCart(props);
 
   return (
-    <Button {...btnProps} data-deco="add-to-cart" class="btn-primary">
-      Adicionar à Sacola
+    <Button {...btnProps} data-deco="add-to-cart" class="group btn-primary rounded-full relative p-0 w-12 max-h-10 h-12 bg-black  hover:bg-white items-center justify-center  ">
+       <Icon
+                    width={24}
+                    className={"hover:invert absolute left-0 right-0 top-0 bottom-0 object-cover m-auto w-full"}
+                    height={24}
+                    strokeWidth={2}
+                    id={"Bag"}
+                  />
     </Button>
   );
 }
