@@ -15,7 +15,6 @@ export interface Props {
   };
 }
  const viewWidth = window.screen
- console.log(viewWidth);
  
 export default function Benefits(
   props: Props,
@@ -52,7 +51,7 @@ export default function Benefits(
 
     return (
       <div
-        class={` col-span-1 ${
+        class={`  w-fit ${
           reverse ? "bg-primary text-primary-content p-4 lg:px-8 lg:py-4" : ""
         } flex gap-4 items-center ${
           benefitLayout == "piledup" ? "flex-col items-center text-center" : ""
@@ -68,16 +67,16 @@ export default function Benefits(
             height={48}
           />
         </div>
-        <div class="flex-auto flex flex-col gap-1 lg:gap-2">
+        <div class="flex-auto flex flex-col gap-1 lg:gap-2 max-w-[221px]">
           <div
-            class={`text-base lg:text-xl leading-7 ${
+            class={`text-sm lg:text-base leading-7 ${
               reverse ? "text-base-100" : "text-base-content"
             }`}
           >
             {benefit.label}
           </div>
           <p
-            class={`text-sm leading-5 ${
+            class={`text-xs break-normal leading-5 ${
               reverse ? "text-base-100" : "text-neutral"
             } ${benefitLayout == "piledup" ? "hidden lg:block" : ""}`}
           >
@@ -99,7 +98,7 @@ export default function Benefits(
               alignment={layout?.headerAlignment || "center"}
             />
             <div class="w-full flex justify-center">
-              <div class="flex flex-col gap-4 lg:gap-8 w-full lg:grid grid-flow-col auto-cols-fr">
+              <div class="flex flex-col bg-gray-100 w-full justify-between lg:p-10 lg:flex-row">
                 {listOfBenefits}
               </div>
             </div>
