@@ -57,7 +57,6 @@ function CartItem(
     [],
   );
 
-  console.log(item);
   return (
     <div
       class="grid grid-rows-1 gap-4 mx-3 border-b pb-4"

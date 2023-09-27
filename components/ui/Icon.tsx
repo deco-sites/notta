@@ -22,6 +22,7 @@ export type AvailableIcons =
   | "Minus"
   | "MapPin"
   | "MagnifyingGlass"
+  | "MagnifyingGlassBlack"
   | "Mastercard"
   | "Message"
   | "Phone"
