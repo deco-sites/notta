@@ -23,6 +23,7 @@ export type AvailableIcons =
   | "Minus"
   | "MapPin"
   | "MagnifyingGlass"
+  | "MagnifyingGlassBlack"
   | "Mastercard"
   | "Message"
   | "Phone"
@@ -38,9 +39,11 @@ export type AvailableIcons =
   | "Truck"
   | "Twitter"
   | "User"
+  | "UserBlack"
   | "Visa"
   | "WhatsApp"
   | "XMark"
+  | "ArrowLeft"
   | "Zoom";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {

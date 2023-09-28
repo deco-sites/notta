@@ -25,7 +25,7 @@ export interface Props {
   /**
    * @title Placeholder
    * @description Search bar default placeholder message
-   * @default What are you looking for?
+   * @default O que você está procurando?
    */
   placeholder?: string;
   /**
@@ -47,7 +47,7 @@ export interface Props {
 }
 
 function Searchbar({
-  placeholder = "What are you looking for?",
+  placeholder = "O que você está procurando?",
   action = "/s",
   name = "q",
   query,
@@ -61,6 +61,7 @@ function Searchbar({
   const hasTerms = Boolean(searches.length);
   const notFound = !hasProducts && !hasTerms;
 
+  console.log(products);
   useEffect(() => {
     if (!searchInputRef.current) {
       return;
@@ -71,25 +72,25 @@ function Searchbar({
 
   return (
     <div
-      class="w-screen grid gap-8 container px-4 py-6 overflow-y-hidden"
+      class="w-[345px]  md:w-screen  grid gap-8 container px-4 py-6 overflow-y-hidden"
       style={{ gridTemplateRows: "min-content auto" }}
     >
-      <form id={id} action={action} class="join">
+      <form id={id} action={action} class="join bg-[#F6F6F6] rounded-lg">
         <Button
           type="submit"
-          class="join-item btn-square"
+          class="join-item bg-[#F6F6F6] border-none"
           aria-label="Search"
           for={id}
           tabIndex={-1}
         >
           {loading.value
             ? <span class="loading loading-spinner loading-xs" />
-            : <Icon id="MagnifyingGlass" size={24} strokeWidth={0.01} />}
+            : <Icon id="MagnifyingGlassBlack" size={24} strokeWidth={1.1} />}
         </Button>
         <input
           ref={searchInputRef}
           id="search-input"
-          class="input input-bordered join-item flex-grow"
+          class="input border-none bg-[#F6F6F6] rounded-lg p-0 outline-none focus:outline-none w-[80%] text-[#111] font-normal text-sm font-[Helvetica]"
           name={name}
           defaultValue={query}
           onInput={(e) => {
@@ -121,7 +122,8 @@ function Searchbar({
       {notFound
         ? (
           <div class="flex flex-col gap-4 w-full">
-            <span
+            {
+              /* <span
               class="font-medium text-xl text-center"
               role="heading"
               aria-level={3}
@@ -131,7 +133,8 @@ function Searchbar({
             <span class="text-center text-base-300">
               Vamos tentar de outro jeito? Verifique a ortografia ou use um
               termo diferente
-            </span>
+            </span> */
+            }
           </div>
         )
         : (
@@ -141,24 +144,26 @@ function Searchbar({
                 class={hasTerms ? "flex flex-col gap-6" : "hidden"}
               >
                 <span
-                  class="font-medium text-xl"
+                  class="font-bold uppercase text-base text-[#626262]"
                   role="heading"
                   aria-level={3}
                 >
                   Sugestões
                 </span>
-                <ul id="search-suggestion" class="flex flex-col gap-6">
+                <ul id="search-suggestion" class="flex flex-col pl-3 gap-3">
                   {searches.map(({ term }) => (
                     <li>
                       <a href={`/s?q=${term}`} class="flex gap-4 items-center">
-                        <span>
+                        {
+                          /* <span>
                           <Icon
-                            id="MagnifyingGlass"
+                            id="MagnifyingGlassBlack"
                             size={24}
-                            strokeWidth={0.01}
+                            strokeWidth={1.1}
                           />
-                        </span>
-                        <span>
+                        </span> */
+                        }
+                        <span class="capitalize text-[#626262] font-normal text-sm">
                           {term}
                         </span>
                       </a>
@@ -172,22 +177,41 @@ function Searchbar({
                   : "hidden"}
               >
                 <span
-                  class="font-medium text-xl"
+                  class="font-bold uppercase text-base text-[#626262]"
                   role="heading"
                   aria-level={3}
                 >
-                  Produtos sugeridos
+                  Produtos
                 </span>
-                <Slider class="carousel">
-                  {products.map((product, index) => (
-                    <Slider.Item
-                      index={index}
-                      class="carousel-item first:ml-4 last:mr-4 min-w-[200px] max-w-[200px]"
-                    >
-                      <ProductCard product={product} platform={"vtex"} />
-                    </Slider.Item>
-                  ))}
-                </Slider>
+
+                {products.map((product, index) => (
+                  <div key={index}>
+                    <a href={product.url} class="flex gap-4">
+                      <div>
+                        <img
+                          src={product?.image?.[0].url}
+                          alt="Product image"
+                          width={66}
+                          height={80}
+                          class="max-w-none rounded"
+                        />
+                      </div>
+                      <div class="flex flex-col gap-[6px]">
+                        <h2 class="text-[#626262] font-[Helvetica] font-normal text-[12px]">
+                          {product?.name}
+                        </h2>
+                        <p>
+                          {product?.offers?.lowPrice !== undefined
+                            ? product.offers.lowPrice.toLocaleString("pt-BR", {
+                              style: "currency",
+                              currency: "BRL",
+                            })
+                            : "Preço indisponível"}
+                        </p>
+                      </div>
+                    </a>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
