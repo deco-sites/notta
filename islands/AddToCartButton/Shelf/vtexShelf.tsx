@@ -1,5 +1,5 @@
-import Component from "$store/components/product/AddToCartButton/vtex.tsx";
-import type { Props } from "$store/components/product/AddToCartButton/vtex.tsx";
+import Component from "$store/components/product/AddToCartButton/Shelf/vtexShelf.tsx";
+import type { Props } from "$store/components/product/AddToCartButton/Shelf/vtexShelf.tsx";
 
 function Island(props: Props) {
   return <Component {...props} />;

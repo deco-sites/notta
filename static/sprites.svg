@@ -99,5 +99,9 @@
 		<path fill-rule="evenodd" clip-rule="evenodd" d="M40.2424 10.2684L42.6128 21.9066H39.891L39.5396 20.2061H35.7635L35.1501 21.9066H32.0769L36.4663 11.1637C36.642 10.6268 37.1691 10.2684 37.6962 10.2684H40.2424ZM39.0122 17.7887L38.1353 13.4025L36.554 17.7887H39.0122Z"/>
 	</symbol>
 
+	<symbol id="Bag" fill="none" viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg">
+		<path d="M7.5 8V6.5a4.5 4.5 0 0 1 9 0V8M3.75 8a.75.75 0 0 0-.75.75v10.125C3 20.293 4.207 21.5 5.625 21.5h12.75c1.418 0 2.625-1.149 2.625-2.566V8.75a.75.75 0 0 0-.75-.75H3.75Z" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/>
+	</symbol>
+
 
 </svg>

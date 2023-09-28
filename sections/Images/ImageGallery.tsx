@@ -236,7 +236,7 @@ export default function Gallery(props: Props) {
     <section class="container max-w-full  py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 px-0">
       {
         banners?.length == 3?
-          <ul class="flex flex-wrap gap-2 md:grid md:grid-cols-2">
+          <ul class="flex flex-wrap gap-1 md:grid md:grid-cols-2">
             {banners?.map((banner, index) => (
               <li class={`${index == 0 ? 'col-span-2 h-auto' : 'col-span-1 h-auto relative' }`}>
                 <Banner {...banner} borderRadius={props.layout?.borderRadius} />
