@@ -3,10 +3,10 @@ import ProductCard, {
   Layout as cardLayout,
 } from "$store/components/product/ProductCard.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
-import Header from "$store/components/ui/SectionHeader.tsx";
+
 import Slider from "$store/components/ui/Slider.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
-import { useId } from "$store/sdk/useId.ts";
+
 import { useOffer } from "$store/sdk/useOffer.ts";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import type { Product } from "apps/commerce/types.ts";
@@ -21,29 +21,25 @@ export interface Props {
     headerfontSize?: "Normal" | "Large";
   };
   cardLayout?: cardLayout;
+  platform: ReturnType<typeof usePlatform>;
+  id: string;
 }
- function ProductShelf({
+ function TabItemProductShelf({
   products,
   title,
   description,
   layout,
   cardLayout,
+  platform,
+  id 
 }: Props) {
-  const id = useId();
-  const platform = usePlatform();
-
+ 
+  
   if (!products || products.length === 0) {
     return null;
   }
   return (
-    <div class="w-full container  py-8 flex flex-col gap-12 lg:gap-16 lg:py-10">
-      <Header
-        title={title || ""}
-        description={description || ""}
-        fontSize={layout?.headerfontSize || "Large"}
-        alignment={layout?.headerAlignment || "center"}
-      />
-
+    <div class="w-full container  py-8 flex flex-col gap-12 lg:gap-16 ">
       <div
         id={id}
         class="container grid grid-cols-[48px_1fr_48px] px-0 sm:px-5"
@@ -64,19 +60,19 @@ export interface Props {
           ))}
         </Slider>
 
-        <div class="flex items-center w-fit gap-6 absolute top-0 right-0 ">
+        <div class="flex items-center w-fit gap-6 absolute lg:top-10 lg:right-10 ">
           <div class="hidden  sm:block   z-10  col-start-1 row-start-3">
-            <Slider.PrevButton class="btn btn-circle btn-outline border-none p-0 bg-transparent   hover:bg-transparent bg-base-100">
+            <Slider.PrevButton class="btn btn-circle btn-outline border-none p-0 bg-transparent   hover:bg-transparent disabled:bg-transparent  w-fit h-fit bg-base-100">
               <Icon size={24} id="ChevronLeft" strokeWidth={3} />
             </Slider.PrevButton>
           </div>
           <div class="hidden  sm:block    z-10 col-start-3 row-start-3">
-            <Slider.NextButton class="btn btn-circle btn-outline border-none p-0 bg-transparent  hover:bg-transparent bg-base-100">
+            <Slider.NextButton class="btn btn-circle btn-outline border-none p-0 bg-transparent  hover:bg-transparent disabled:bg-transparent w-fit h-fit bg-base-100">
               <Icon size={24} id="ChevronRight" strokeWidth={3} />
             </Slider.NextButton>
           </div>
         </div>
-        <SliderJS rootId={id} />
+        <SliderJS rootId={id}  />
         <SendEventOnLoad
           event={{
             name: "view_item_list",
@@ -96,4 +92,4 @@ export interface Props {
   );
 }
 
-export default ProductShelf;
+export default TabItemProductShelf;

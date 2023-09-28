@@ -46,7 +46,8 @@ const isHTMLElement = (x: Element): x is HTMLElement =>
   // deno-lint-ignore no-explicit-any
   typeof (x as any).offsetLeft === "number";
 
-const setup = ({ rootId, scroll, interval, infinite }: Props) => {
+const setup = ({ rootId, scroll, interval, infinite}: Props) => {
+ 
   const root = document.getElementById(rootId);
   const slider = root?.querySelector(`[${ATTRIBUTES["data-slider"]}]`);
   const items = root?.querySelectorAll(`[${ATTRIBUTES["data-slider-item"]}]`);
@@ -189,12 +190,14 @@ function Slider({
   scroll = "smooth",
   interval,
   infinite = false,
+ 
 }: Props) {
   useEffect(() => setup({ rootId, scroll, interval, infinite }), [
     rootId,
     scroll,
     interval,
     infinite,
+   
   ]);
 
   return <div data-slider-controller-js />;
