@@ -43,7 +43,7 @@ function Cart({
 }: Props) {
   const { displayCart } = useUI();
   const isEmtpy = items.length === 0;
-  console.log(displayCart.value);
+
 
   return (
     <div
