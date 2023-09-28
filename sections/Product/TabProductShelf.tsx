@@ -1,1 +1,1 @@
-export {default} from "$store/islands/TabProductShelf.tsx"
+export {default} from "$store/components/product/TabProductShelf.tsx"
