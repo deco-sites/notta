@@ -2,6 +2,7 @@ import Icon from "$store/components/ui/Icon.tsx";
 import type { INavItem } from "./NavItem.tsx";
 import { useState } from "preact/hooks";
 import Searchbar from "../search/Searchbar.tsx";
+import FooterMenu from "./FooterMenu.tsx";
 
 export interface Props {
   items: INavItem[];
@@ -23,29 +24,34 @@ function MenuItem({ item }: { item: INavItem }) {
         <div class="">
           <div
             onClick={() => toggleDrawer(item)}
-            class="collapse-title text-[#626262] text-sm font-normal uppercase px-2 py-5"
+            class="text-[#626262] text-sm font-normal uppercase px-2 py-5 flex justify-between items-center"
           >
-            {item.label}
+            <p>{item.label}</p>
+            <Icon class="rotate-180" id="ArrowLeft" size={20} strokeWidth={1} />
           </div>
           <div
             class={`fixed top-0 left-0 w-[100%] h-full bg-white shadow-lg transition-transform transform ${
               isDrawerOpen ? "translate-x-0" : "-translate-x-full"
             }`}
           >
+            <div>
+              <Searchbar />
+            </div>
             <div
               onClick={() => setIsDrawerOpen(!isDrawerOpen)}
-              class="text-[#626262] text-base font-bold uppercase px-2 py-5"
+              class="text-[#626262] text-base font-bold uppercase px-2 py-5 flex gap-3 items-center"
             >
+              <Icon id="ArrowLeft" size={20} strokeWidth={1} />
               {item.label}
-              <Icon id="ArrowLeft" size={24} strokeWidth={1} />
             </div>
-            <ul>
+            <ul class="h-[80%] bg-white  divide-y">
               {itemMenu?.children?.map((node) => (
-                <li class="text-[#626262] text-sm font-normal uppercase px-2 py-5 ">
+                <li class="text-[#626262] text-sm font-normal uppercase mx-4 px-2 py-5 flex justify-between items-center">
                   <MenuItemSecond item={node} />
                 </li>
               ))}
             </ul>
+            <FooterMenu />
           </div>
         </div>
       )
@@ -74,12 +80,13 @@ function MenuItemSecond({ item }: { item: INavItem }) {
   return (
     item.children !== undefined && item?.children?.length > 0
       ? (
-        <div class="">
+        <div class="w-full">
           <div
             onClick={() => toggleDrawerSecond(item)}
-            class="collapse-title text-[#626262] text-sm font-normal uppercase px-2 py-5"
+            class="text-[#626262] text-sm font-normal uppercase  flex justify-between items-center w-full"
           >
-            {item.label}
+            <p>{item.label}</p>
+            <Icon class="rotate-180" id="ArrowLeft" size={20} strokeWidth={1} />
           </div>
           <div
             class={`fixed top-0 left-0  w-[100%] h-full bg-white shadow-lg transition-transform transform ${
@@ -88,28 +95,32 @@ function MenuItemSecond({ item }: { item: INavItem }) {
                 : "-translate-x-full"
             }`}
           >
+            <div>
+              <Searchbar />
+            </div>
             <div
               onClick={() => setIsDrawerOpenSecond(!isDrawerOpenSecond)}
-              class="text-[#626262] text-base font-bold uppercase px-2 py-5"
+              class="text-[#626262] text-base font-bold uppercase px-2 py-5 flex gap-3 items-center"
             >
+              <Icon id="ArrowLeft" size={20} strokeWidth={1} />
               {item.label}
-              <Icon id="ArrowLeft" size={24} strokeWidth={1} />
             </div>
 
-            <ul>
+            <ul class="h-[80%] bg-white">
               {itemMenuSecond?.children?.map((node) => (
-                <li class="text-[#626262] text-sm font-normal uppercase px-2 py-5 ">
+                <li class="text-[#626262] text-sm font-normal uppercase mx-4 px-2 py-5 flex justify-between items-center">
                   <MenuItemSecond item={node} />
                 </li>
               ))}
             </ul>
+            <FooterMenu />
           </div>
         </div>
       )
       : (
-        <div class="px-2 py-5">
+        <div>
           <a
-            class=" text-[#626262] text-sm font-normal uppercase"
+            class="text-[#626262] text-sm font-normal uppercase"
             href={item.href}
           >
             {item.label}
@@ -125,49 +136,15 @@ function Menu({ items }: Props) {
       <div>
         <Searchbar />
       </div>
-      <ul class="px-4 flex-grow flex flex-col divide-y divide-base-200">
+      <ul class="flex-grow flex flex-col mx-4 divide-base-200 bg-white divide-y">
         {items?.map((item) => (
-          <li>
+          <li class="">
             <MenuItem item={item} />
           </li>
         ))}
       </ul>
 
-      <ul class="flex flex-col py-6 px-4 bg-[#F6F6F6] border-t border-[#E1E1E1]">
-        <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2"
-            href="https://www.deco.cx"
-          >
-            <Icon id="UserBlack" size={24} strokeWidth={1} />
-            <span class="text-xs font-normal capitalize text-[#626262]">
-              Fazer Login/Registrar
-            </span>
-          </a>
-        </li>
-        <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2"
-            href="/wishlist"
-          >
-            <Icon id="Heart" size={24} strokeWidth={1} fill="none" />
-            <span class="text-xs font-normal capitalize text-[#626262]">
-              Meus Favoritos
-            </span>
-          </a>
-        </li>
-        <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2"
-            href="https://www.deco.cx"
-          >
-            <Icon id="Truck" size={24} strokeWidth={1.5} />
-            <span class="text-xs font-normal capitalize text-[#626262]">
-              Meus Pedidos
-            </span>
-          </a>
-        </li>
-      </ul>
+      <FooterMenu />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { asset } from "$fresh/runtime.ts";
 import type { JSX } from "preact";
 
 export type AvailableIcons =
-    "Bag"
+  | "Bag"
   | "ArrowsPointingOut"
   | "Bars3"
   | "ChevronLeft"
@@ -44,6 +44,7 @@ export type AvailableIcons =
   | "WhatsApp"
   | "XMark"
   | "ArrowLeft"
+  | "Pink"
   | "Zoom";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
