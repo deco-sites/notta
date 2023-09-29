@@ -44,7 +44,7 @@ function MenuItem({ item }: { item: INavItem }) {
               <Icon id="ArrowLeft" size={20} strokeWidth={1} />
               {item.label}
             </div>
-            <ul class="h-[80%] bg-white  divide-y">
+            <ul class="h-[70%] pb-40 bg-white divide-y overflow-y-auto">
               {itemMenu?.children?.map((node) => (
                 <li class="text-[#626262] text-sm font-normal uppercase mx-4 px-2 py-5 flex justify-between items-center">
                   <MenuItemSecond item={node} />
@@ -106,7 +106,7 @@ function MenuItemSecond({ item }: { item: INavItem }) {
               {item.label}
             </div>
 
-            <ul class="h-[80%] bg-white">
+            <ul class="h-[70%] pb-40 bg-white overflow-y-auto">
               {itemMenuSecond?.children?.map((node) => (
                 <li class="text-[#626262] text-sm font-normal uppercase mx-4 px-2 py-5 flex justify-between items-center">
                   <MenuItemSecond item={node} />
@@ -120,10 +120,19 @@ function MenuItemSecond({ item }: { item: INavItem }) {
       : (
         <div>
           <a
-            class="text-[#626262] text-sm font-normal uppercase"
             href={item.href}
           >
-            {item.label}
+            {item.label.toLocaleLowerCase() == "Sale".toLocaleLowerCase()
+              ? (
+                <span class="text-[#EA94AB] text-sm font-bold">
+                  {item.label}
+                </span>
+              )
+              : (
+                <span class="text-[#626262] text-sm font-normal uppercase">
+                  {item.label}
+                </span>
+              )}
           </a>
         </div>
       )
@@ -132,11 +141,11 @@ function MenuItemSecond({ item }: { item: INavItem }) {
 
 function Menu({ items }: Props) {
   return (
-    <div class="flex flex-col h-full bg-white w-[345px]">
+    <div class="flex flex-col h-full bg-white w-[345px] re">
       <div>
         <Searchbar />
       </div>
-      <ul class="flex-grow flex flex-col mx-4 divide-base-200 bg-white divide-y">
+      <ul class="h-[60%] flex flex-col mx-4  bg-white divide-y pb-40  overflow-y-auto">
         {items?.map((item) => (
           <li class="">
             <MenuItem item={item} />
