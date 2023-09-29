@@ -72,7 +72,7 @@ function Searchbar({
 
   return (
     <div
-      class="w-[345px]  md:w-screen  grid gap-8 container px-4 py-6 overflow-y-hidden"
+      class="w-[345px]  md:w-screen  grid  container px-4 py-6 overflow-y-hidden"
       style={{ gridTemplateRows: "min-content auto" }}
     >
       <form id={id} action={action} class="join bg-[#F6F6F6] rounded-lg">
@@ -90,7 +90,7 @@ function Searchbar({
         <input
           ref={searchInputRef}
           id="search-input"
-          class="input border-none bg-[#F6F6F6] rounded-lg p-0 outline-none focus:outline-none w-[80%] text-[#111] font-normal text-sm font-[Helvetica]"
+          class="input border-none bg-[#F6F6F6] rounded-lg p-0 outline-none focus:outline-none w-[80%] text-[#111] font-normal text-sm font-[Helvetica] placeholder:text-xs"
           name={name}
           defaultValue={query}
           onInput={(e) => {
@@ -138,7 +138,7 @@ function Searchbar({
           </div>
         )
         : (
-          <div class="overflow-y-scroll">
+          <div class="overflow-y-scroll mt-4">
             <div class="gap-4 grid grid-cols-1 sm:grid-rows-1 sm:grid-cols-[150px_1fr]">
               <div
                 class={hasTerms ? "flex flex-col gap-6" : "hidden"}
