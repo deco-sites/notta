@@ -22,8 +22,8 @@ function Navbar({ items, searchbar, logo }: {
   return (
     <>
       {/* Mobile Version */}
-      <div class="md:hidden flex flex-row justify-between items-center w-full px-4 gap-2 bg-gradient-to-b from-[#000000c5] to-transparent backdrop-blur-[1px] pt-6 pb-12">
-        <div>
+      <div class="md:hidden flex flex-row justify-between items-center w-full px-4 gap-2 bg-gradient-to-b from-[#000000d8] to-transparent backdrop-blur-[1px] pt-6 pb-12">
+        <div class="flex gap-2 w-[76px]">
           <MenuButton />
           <SearchButton />
         </div>
@@ -39,7 +39,7 @@ function Navbar({ items, searchbar, logo }: {
           </a>
         )}
 
-        <div class="flex gap-1">
+        <div class="flex gap-3">
           <a
             class="btn btn-circle btn-sm btn-ghost"
             href="/login"
@@ -53,47 +53,49 @@ function Navbar({ items, searchbar, logo }: {
       </div>
 
       {/* Desktop Version */}
-      <div class="hidden md:flex flex-row justify-between items-centerbg-gradient-to-b from-[#000000c5] to-transparent backdrop-blur-[1px] pt-6 pb-12">
-        <div class="flex justify-center">
-          {items.map((item) => <NavItem item={item} />)}
-        </div>
-        <div class="flex-none w-44">
-          {logo && (
+      <div class="hidden md:flex bg-gradient-to-b from-[rgba(0,0,0,0.77)] to-transparent backdrop-blur-[1px] pt-6 pb-6">
+        <div class="md:flex flex-row w-full justify-between items-center  max-w-screen-xl px-10 m-auto">
+          <div class="flex justify-center">
+            {items.map((item) => <NavItem item={item} />)}
+          </div>
+          <div class="flex-none w-44">
+            {logo && (
+              <a
+                href="/"
+                aria-label="Store logo"
+                class="block px-4 pb-5 w-[203px]"
+              >
+                <Image src={logo.src} alt={logo.alt} width={203} height={44} />
+              </a>
+            )}
+          </div>
+          <div class="flex-none w-44 flex items-center justify-end gap-2">
+            <SearchButton />
+            <Searchbar searchbar={searchbar} />
             <a
-              href="/"
-              aria-label="Store logo"
-              class="block px-4 py-3 w-[160px]"
+              class="btn btn-circle btn-sm btn-ghost"
+              href="/login"
+              aria-label="Log in"
             >
-              <Image src={logo.src} alt={logo.alt} width={126} height={16} />
+              <Icon id="User" size={24} strokeWidth={1} />
             </a>
-          )}
-        </div>
-        <div class="flex-none w-44 flex items-center justify-end gap-2">
-          <SearchButton />
-          <Searchbar searchbar={searchbar} />
-          <a
-            class="btn btn-circle btn-sm btn-ghost"
-            href="/login"
-            aria-label="Log in"
-          >
-            <Icon id="User" size={24} strokeWidth={0.4} />
-          </a>
-          <a
-            class="btn btn-circle btn-sm btn-ghost"
-            href="/wishlist"
-            aria-label="Wishlist"
-          >
-            <Icon
-              id="Heart"
-              size={24}
-              strokeWidth={2}
-              fill="none"
-            />
-          </a>
-          {platform === "vtex" && <CartButtonVTEX />}
-          {platform === "vnda" && <CartButtonVDNA />}
-          {platform === "wake" && <CartButtonWake />}
-          {platform === "shopify" && <CartButtonShopify />}
+            <a
+              class="btn btn-circle btn-sm btn-ghost"
+              href="/wishlist"
+              aria-label="Wishlist"
+            >
+              <Icon
+                id="HeartWhite"
+                size={24}
+                strokeWidth={1}
+                fill="none"
+              />
+            </a>
+            {platform === "vtex" && <CartButtonVTEX />}
+            {platform === "vnda" && <CartButtonVDNA />}
+            {platform === "wake" && <CartButtonWake />}
+            {platform === "shopify" && <CartButtonShopify />}
+          </div>
         </div>
       </div>
     </>
