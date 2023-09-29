@@ -51,8 +51,8 @@ export default function Benefits(
 
     return (
       <div
-        class={`  w-fit ${
-          reverse ? "bg-primary text-primary-content p-4 lg:px-8 lg:py-4" : ""
+        class={` w-max lg:w-fit py-14 px-6 lg:py-0 lg:px-0 rounded-lg ${
+          reverse ? "bg-primary text-primary-content p-4 lg:px-8 lg:py-4" : "bg-gray-100"
         } flex gap-4 items-center ${
           benefitLayout == "piledup" ? "flex-col items-center text-center" : ""
         }  ${
@@ -67,9 +67,9 @@ export default function Benefits(
             height={48}
           />
         </div>
-        <div class="flex-auto flex flex-col gap-1 lg:gap-2 max-w-[221px]">
+        <div class="flex-auto flex flex-col gap-1 lg:gap-2 max-w-[157px] lg:max-w-[221px]:">
           <div
-            class={`text-sm lg:text-base leading-7 ${
+            class={`text-sm lg:text-base  ${
               reverse ? "text-base-100" : "text-base-content"
             }`}
           >
@@ -97,8 +97,8 @@ export default function Benefits(
               description={description}
               alignment={layout?.headerAlignment || "center"}
             />
-            <div class="w-full flex justify-center">
-              <div class="flex flex-col bg-gray-100 w-full justify-between lg:p-10 lg:flex-row">
+            <div class="w-full flex lg:justify-center overflow-x-auto">
+              <div class="flex bg-transparent gap-2 lg:bg-gray-100 w-max lg:w-full justify-between lg:p-10 ">
                 {listOfBenefits}
               </div>
             </div>

@@ -70,7 +70,6 @@ function ProductCard(
     isVariantOf,
   } = product;
 
-  
   const id = `product-card-${productID}`;
   const productGroupID = isVariantOf?.productGroupID ?? "";
   const [front, back] = images ?? [];
@@ -111,7 +110,7 @@ function ProductCard(
   return (
     <div
       id={id}
-      class={`card card-compact rounded-none  group w-full ${
+      class={`card card-compact rounded-none  group gap-4 w-full ${
         align === "center" ? "text-center" : "text-start"
       } ${l?.onMouseOver?.showCardShadow ? "lg:hover:card-bordered" : ""}
         ${
@@ -280,9 +279,11 @@ function ProductCard(
             {l?.hide?.installments && !installments
               ? ""
               : (
-                <div class="text-base-300 text-xs">
-                  ou {installments}
-                </div>
+                installments && (
+                  <div class="text-base-300 text-xs">
+                    ou {installments}
+                  </div>
+                )
               )}
           </div>
         )}
