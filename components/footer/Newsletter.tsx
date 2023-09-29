@@ -94,7 +94,7 @@ export default function Newsletter(props: Props) {
 
   const formLayout = form && (
     <form  onSubmit={handleSubmit} class=" form-control flex flex-col gap-6 items-center justify-center w-full">
-      <div class="flex flex-col lg:flex-row gap-3 w-full">
+      <div class="flex flex-col lg:flex-row gap-3 w-full lg:justify-center">
         <input
           class="input bg-gray-100  placeholder:text-sm placeholder:text-gray-700  lg:w-80"
           type="text"

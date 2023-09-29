@@ -78,7 +78,6 @@ function ProductCard(
     installments,
     seller = "1",
    } = useOffer(offers);
-   console.log(installments)
   const possibilities = useVariantPossibilities(product);
   const discount = price && listPrice ? listPrice - price : 0;
   const variants = Object.entries(Object.values(possibilities)[0] ?? {});
