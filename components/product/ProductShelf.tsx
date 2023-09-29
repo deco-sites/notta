@@ -35,8 +35,10 @@ export interface Props {
   if (!products || products.length === 0) {
     return null;
   }
+ 
+  
   return (
-    <div class="w-full container  py-8 flex flex-col gap-12 lg:gap-16 lg:py-10">
+    <div class="w-full container  py-8 flex flex-col gap-4 lg:gap-6 lg:py-10 relative">
       <Header
         title={title || ""}
         description={description || ""}
@@ -64,14 +66,14 @@ export interface Props {
           ))}
         </Slider>
 
-        <div class="flex items-center w-fit gap-6 absolute top-0 right-0 ">
+        <div class="flex items-center w-fit gap-6 absolute top-8 right-0 ">
           <div class="hidden  sm:block   z-10  col-start-1 row-start-3">
-            <Slider.PrevButton class="btn btn-circle btn-outline border-none p-0 bg-transparent   hover:bg-transparent bg-base-100">
+            <Slider.PrevButton class="btn btn-circle btn-outline border-none p-0 bg-transparent disabled:bg-transparent   hover:bg-transparent bg-base-100">
               <Icon size={24} id="ChevronLeft" strokeWidth={3} />
             </Slider.PrevButton>
           </div>
           <div class="hidden  sm:block    z-10 col-start-3 row-start-3">
-            <Slider.NextButton class="btn btn-circle btn-outline border-none p-0 bg-transparent  hover:bg-transparent bg-base-100">
+            <Slider.NextButton class="btn btn-circle btn-outline border-none p-0 bg-transparent disabled:bg-transparent  hover:bg-transparent bg-base-100">
               <Icon size={24} id="ChevronRight" strokeWidth={3} />
             </Slider.NextButton>
           </div>

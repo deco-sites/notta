@@ -58,7 +58,7 @@ function WishlistButton({
       <Icon
         id="Heart"
 
-        class={variant === "icon" ? "invert hover:invert-0 absolute left-0 right-0 top-0 bottom-0 object-cover m-auto w-full" : ""}
+        class={variant === "icon" ? " hover:invert absolute left-0 right-0 top-0 bottom-0 object-cover m-auto w-full" : ""}
         size={24}
         strokeWidth={2}
         fill={inWishlist ? "black" : "none"}
