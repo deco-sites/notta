@@ -30,13 +30,15 @@ function MenuItem({ item }: { item: INavItem }) {
             <Icon class="rotate-180" id="ArrowLeft" size={20} strokeWidth={1} />
           </div>
           <div
-            class={`fixed top-0 left-0 w-[100%] h-full bg-white shadow-lg transition-transform transform ${
+            class={`fixed top-[180px] left-0 w-[100%] h-full bg-white shadow-lg transition-transform transform ${
               isDrawerOpen ? "translate-x-0" : "-translate-x-full"
             }`}
           >
-            <div>
+            {
+              /* <div class="">
               <Searchbar />
-            </div>
+            </div> */
+            }
             <div
               onClick={() => setIsDrawerOpen(!isDrawerOpen)}
               class="text-[#626262] text-base font-bold uppercase px-2 py-5 flex gap-3 items-center"
@@ -44,14 +46,13 @@ function MenuItem({ item }: { item: INavItem }) {
               <Icon id="ArrowLeft" size={20} strokeWidth={1} />
               {item.label}
             </div>
-            <ul class="h-[70%] pb-40 bg-white divide-y overflow-y-auto">
+            <ul class="bg-white divide-y pb-10">
               {itemMenu?.children?.map((node) => (
                 <li class="text-[#626262] text-sm font-normal uppercase mx-4 px-2 py-5 flex justify-between items-center">
                   <MenuItemSecond item={node} />
                 </li>
               ))}
             </ul>
-            <FooterMenu />
           </div>
         </div>
       )
@@ -89,15 +90,17 @@ function MenuItemSecond({ item }: { item: INavItem }) {
             <Icon class="rotate-180" id="ArrowLeft" size={20} strokeWidth={1} />
           </div>
           <div
-            class={`fixed top-0 left-0  w-[100%] h-full bg-white shadow-lg transition-transform transform ${
+            class={`fixed top-0 left-0 bottom-0  w-[100%] h-full bg-white shadow-lg transition-transform transform ${
               isDrawerOpenSecond
                 ? "translate-x-0 z-[1000]"
                 : "-translate-x-full"
             }`}
           >
-            <div>
+            {
+              /* <div class="">
               <Searchbar />
-            </div>
+            </div> */
+            }
             <div
               onClick={() => setIsDrawerOpenSecond(!isDrawerOpenSecond)}
               class="text-[#626262] text-base font-bold uppercase px-2 py-5 flex gap-3 items-center"
@@ -106,14 +109,13 @@ function MenuItemSecond({ item }: { item: INavItem }) {
               {item.label}
             </div>
 
-            <ul class="h-[70%] pb-40 bg-white overflow-y-auto">
+            <ul class="bg-white pb-10">
               {itemMenuSecond?.children?.map((node) => (
                 <li class="text-[#626262] text-sm font-normal uppercase mx-4 px-2 py-5 flex justify-between items-center">
                   <MenuItemSecond item={node} />
                 </li>
               ))}
             </ul>
-            <FooterMenu />
           </div>
         </div>
       )
@@ -142,10 +144,10 @@ function MenuItemSecond({ item }: { item: INavItem }) {
 function Menu({ items }: Props) {
   return (
     <div class="flex flex-col h-full bg-white w-[345px] re">
-      <div>
+      <div class="">
         <Searchbar />
       </div>
-      <ul class="h-[60%] flex flex-col mx-4  bg-white divide-y pb-40  overflow-y-auto">
+      <ul class="flex flex-col pb-10 mx-4  bg-white divide-y">
         {items?.map((item) => (
           <li class="">
             <MenuItem item={item} />

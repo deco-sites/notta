@@ -23,7 +23,25 @@
     height: 100vh;
   }
 }
+.navbar-desktop:hover .nav-item-desktop{
+  color: #111;
+}
+.navbar-desktop:hover .icon-magnify,
+.navbar-desktop:hover .icon-user,
+.navbar-desktop:hover .icon-heart,
+.navbar-desktop:hover .icon-cart{
+  filter: invert(1);
+}
 
+.icon-user:hover path,
+.icon-heart:hover path,
+.icon-cart:hover path{
+  fill: black;
+}
+.navbar-desktop .icon-heart:hover{
+  fill: black;
+  stroke: black;
+}
 .group:disabled .group-disabled\:animate-progress {
   animation: progress-frame ease normal
 }
