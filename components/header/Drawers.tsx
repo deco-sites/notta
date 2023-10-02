@@ -37,7 +37,10 @@ export const Aside = (
         </span>
       </h1>
       {onClose && (
-        <Button class="btn btn-ghost p-0" onClick={onClose}>
+        <Button
+          class="btn btn-ghost hover:bg-transparent p-0"
+          onClick={onClose}
+        >
           <Icon id="XMark" size={24} strokeWidth={2} />
         </Button>
       )}

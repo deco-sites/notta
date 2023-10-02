@@ -11,6 +11,7 @@ import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import type { INavItem } from "./NavItem.tsx";
 import NavItem from "./NavItem.tsx";
 import { headerHeightDesktop, headerHeightMobile } from "./constants.ts";
+// import "./styles.css";
 
 function Navbar({ items, searchbar, logo }: {
   items: INavItem[];
@@ -53,7 +54,7 @@ function Navbar({ items, searchbar, logo }: {
       </div>
 
       {/* Desktop Version */}
-      <div class="hidden md:flex bg-gradient-to-b from-[rgba(0,0,0,0.77)] to-transparent backdrop-blur-[1px] pt-6 pb-6">
+      <div class="hidden md:flex bg-gradient-to-b from-[rgba(0,0,0,0.77)] to-transparent backdrop-blur-[1px] pt-6 pb-6 hover:bg-[#ffffff96] hover:from-[#ffffffbf] navbar-desktop">
         <div class="md:flex flex-row w-full justify-between items-center  max-w-screen-xl px-10 m-auto">
           <div class="flex justify-center">
             {items.map((item) => <NavItem item={item} />)}
@@ -69,26 +70,32 @@ function Navbar({ items, searchbar, logo }: {
               </a>
             )}
           </div>
-          <div class="flex-none w-44 flex items-center justify-end gap-2">
+          <div class=" w-[312px] flex items-center justify-end gap-6">
             <SearchButton />
             <Searchbar searchbar={searchbar} />
             <a
-              class="btn btn-circle btn-sm btn-ghost"
+              // class="btn btn-circle btn-sm btn-ghost"
               href="/login"
               aria-label="Log in"
             >
-              <Icon id="User" size={24} strokeWidth={1} />
+              <Icon
+                class="icon-user"
+                id="User"
+                size={24}
+                strokeWidth={1}
+                fill="currentColor"
+              />
             </a>
             <a
-              class="btn btn-circle btn-sm btn-ghost"
+              class="mt-1"
               href="/wishlist"
               aria-label="Wishlist"
             >
               <Icon
+                class="icon-heart"
                 id="HeartWhite"
                 size={24}
                 strokeWidth={1}
-                fill="none"
               />
             </a>
             {platform === "vtex" && <CartButtonVTEX />}
