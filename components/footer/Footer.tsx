@@ -219,13 +219,13 @@ function Footer({
 
   return (
     <footer
-      class={`w-full flex flex-col pt-10 pb-2 md:pb-10 gap-10 bg-[#eee]
+      class={`w-full flex flex-col pt-10 gap-10 bg-[#eee]
       `}
     >
       <div class="">
         {(!layout?.variation || layout?.variation == "Variation 1") && (
-          <div class="flex flex-col md:items-center gap-10 md:justify-center md:w-full">
-            <div class="flex flex-col-reverse  md:flex-row md:w-full md:max-w-7xl md:px-10 gap-10 md:gap-32">
+          <div class="flex flex-col md:items-center md:justify-center md:w-full">
+            <div class="flex flex-col-reverse  md:flex-row md:w-full md:max-w-7xl md:px-10 gap-10 md:pb-11 md:gap-32">
               {_sectionLinks}
               {_social}
             </div>
@@ -245,7 +245,7 @@ function Footer({
                 {_links}
               </div>
             </div>
-            <div class="flex flex-col gap-4 items-center md:flex-row md:justify-between md:w-full md:px-10 md:max-w-7xl pb-6">
+            <div class="flex flex-col gap-4 items-center md:flex-row md:justify-between md:w-full md:px-10 md:max-w-7xl pb-6 pt-5">
               <div class="md:w-[127px]">
                 <Icon
                   width={45}
@@ -254,7 +254,7 @@ function Footer({
                   id="PinkAll"
                 />
               </div>
-              <p class="text-[#111] text-[11px] font-normal text-center px-4">
+              <p class="text-[#111] text-[12px] font-normal text-center px-4">
                 Laços de Filó Com. de Ac. de Moda Ltda. | Av. das Américas, 700,
                 bloco 6, sala 317 - RJ, 22640-100 | CNPJ: 16.455.670/0001-32
               </p>

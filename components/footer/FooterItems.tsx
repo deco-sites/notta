@@ -65,7 +65,7 @@ export default function FooterItems(
                       />
                     </summary>
                     <ul
-                      class={`flex flex-col gap-3 items-center pb-8`}
+                      class={`flex flex-col gap-4 items-center pb-8`}
                     >
                       {section.items?.map((item) => (
                         <li>
