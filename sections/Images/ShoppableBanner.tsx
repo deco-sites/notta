@@ -46,7 +46,7 @@ export default function ShoppableBanner(props: Props) {
   const { link, text, title, image} = { ...DEFAULT_PROPS, ...props };
 
   return (
-    <div class="container md:min-h-[684px] lg:my-10">
+    <div class="container md:min-h-[684px] lg:my-10 my-6">
       <div class="flex flex-col md:flex-row gap-6 md:gap-10 h-full bg-[#DADBBA]">
         <figure  class="relative md:w-1/2">
           <Picture>
