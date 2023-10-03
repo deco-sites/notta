@@ -2,7 +2,7 @@ import Icon from "$store/components/ui/Icon.tsx";
 
 function FooterMenu() {
   return (
-    <div class="w-full py-6 px-4 flex justify-between bg-[#F6F6F6] border-t border-[#E1E1E1]">
+    <div class="w-full py-6 px-4 flex justify-between bg-[#F6F6F6] border-t border-[#E1E1E1] absolute bottom-0">
       <ul class="flex gap-4 flex-col ">
         <h2 class="uppercase text-xs font-bold ">MINHA CONTA</h2>
         <li>

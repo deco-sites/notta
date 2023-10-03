@@ -1,7 +1,8 @@
 import Icon from "$store/components/ui/Icon.tsx";
 import type { INavItem } from "./NavItem.tsx";
 import { useState } from "preact/hooks";
-import Searchbar from "../search/Searchbar.tsx";
+// import Searchbar from "../search/Searchbar.tsx";
+import SearchbarMobile from "../search/SearchbarMobile.tsx";
 import FooterMenu from "./FooterMenu.tsx";
 
 export interface Props {
@@ -30,7 +31,7 @@ function MenuItem({ item }: { item: INavItem }) {
             <Icon class="rotate-180" id="ArrowLeft" size={20} strokeWidth={1} />
           </div>
           <div
-            class={`fixed top-[180px] left-0 w-[100%] h-full bg-white shadow-lg transition-transform transform ${
+            class={`fixed top-[180px] left-0 w-[100%] h-[80%] overflow-auto pb-56 bg-white shadow-lg transition-transform transform ${
               isDrawerOpen ? "translate-x-0" : "-translate-x-full"
             }`}
           >
@@ -90,7 +91,7 @@ function MenuItemSecond({ item }: { item: INavItem }) {
             <Icon class="rotate-180" id="ArrowLeft" size={20} strokeWidth={1} />
           </div>
           <div
-            class={`fixed top-0 left-0 bottom-0  w-[100%] h-full bg-white shadow-lg transition-transform transform ${
+            class={`fixed top-0 left-0 bottom-0  w-[100%] h-full overflow-auto pb-56 bg-white shadow-lg transition-transform transform ${
               isDrawerOpenSecond
                 ? "translate-x-0 z-[1000]"
                 : "-translate-x-full"
@@ -145,9 +146,9 @@ function Menu({ items }: Props) {
   return (
     <div class="flex flex-col h-full bg-white w-[345px] re">
       <div class="">
-        <Searchbar />
+        <SearchbarMobile />
       </div>
-      <ul class="flex flex-col pb-10 mx-4  bg-white divide-y">
+      <ul class="flex flex-col  mx-4  pb-[80px] overflow-auto h-[50%]  bg-white divide-y">
         {items?.map((item) => (
           <li class="">
             <MenuItem item={item} />
