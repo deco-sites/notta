@@ -44,8 +44,13 @@ export type AvailableIcons =
   | "WhatsApp"
   | "XMark"
   | "ArrowLeft"
+  | "ArrowUp"
   | "Pink"
+  | "PinkAll"
   | "HeartWhite"
+  | "WicommBlack"
+  | "Deco"
+  | "SmileBlack"
   | "Zoom";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {

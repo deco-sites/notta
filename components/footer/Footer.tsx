@@ -11,15 +11,20 @@ import Social from "$store/components/footer/Social.tsx";
 import Newsletter from "$store/islands/Newsletter.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import PoweredByDeco from "apps/website/components/PoweredByDeco.tsx";
+import Icon from "$store/components/ui/Icon.tsx";
 
 export type Item = {
   label: string;
   href: string;
 };
+export type ItemSecion = {
+  label: string;
+  href?: string;
+};
 
 export type Section = {
   label: string;
-  items: Item[];
+  items: ItemSecion[];
 };
 
 export interface SocialItem {
@@ -180,15 +185,15 @@ function Footer({
   },
 }: Props) {
   const _logo = layout?.hide?.logo ? <></> : <Logo logo={logo} />;
-  const _newsletter = layout?.hide?.newsletter ? <></> : (
-    <Newsletter
-      content={newsletter}
-      layout={{
-        tiled: layout?.variation == "Variation 4" ||
-          layout?.variation == "Variation 5",
-      }}
-    />
-  );
+  // const _newsletter = layout?.hide?.newsletter ? <></> : (
+  //   <Newsletter
+  //     content={newsletter}
+  //     layout={{
+  //       tiled: layout?.variation == "Variation 4" ||
+  //         layout?.variation == "Variation 5",
+  //     }}
+  //   />
+  // );
   const _sectionLinks = layout?.hide?.sectionLinks ? <></> : (
     <FooterItems
       sections={sections}
@@ -214,31 +219,59 @@ function Footer({
 
   return (
     <footer
-      class={`w-full flex flex-col pt-10 pb-2 md:pb-10 gap-10 ${
-        ColorClasses(layout)
-      }`}
+      class={`w-full flex flex-col pt-10 pb-2 md:pb-10 gap-10 bg-[#eee]
+      `}
     >
-      <div class="lg:container mx-6 lg:mx-auto">
+      <div class="">
         {(!layout?.variation || layout?.variation == "Variation 1") && (
-          <div class="flex flex-col gap-10">
-            <div class="flex flex-col md:flex-row md:justify-between md:flex-wrap lg:flex-nowrap gap-8 lg:gap-12">
-              {_logo}
+          <div class="flex flex-col md:items-center gap-10 md:justify-center md:w-full">
+            <div class="flex flex-col-reverse  md:flex-row md:w-full md:max-w-7xl md:px-10 gap-10 md:gap-32">
               {_sectionLinks}
-              {_newsletter}
-            </div>
-            <Divider />
-            <div class="flex flex-col md:flex-row gap-10 md:gap-14 md:items-end">
-              {_payments}
               {_social}
-              <div class="flex flex-col lg:flex-row gap-10 lg:gap-14 lg:items-end">
-                {_apps}
-                {_region}
+            </div>
+            <div class="w-full">
+              <div class="bg-[#EA94AB] py-2 md:py-4 px-10 w-full flex justify-center">
+                <p class="text-[#111] text-xs font-bold flex gap-2">
+                  FEITO NO BRASIL
+                  <Icon
+                    width={12}
+                    height={13}
+                    strokeWidth={1}
+                    id="SmileBlack"
+                  />
+                </p>
+              </div>
+              <div class="bg-[#12100C] py-2 md:py-4 md:px-10 w-full flex justify-center">
+                {_links}
               </div>
             </div>
-            <Divider />
-            <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10">
-              <PoweredByDeco />
-              {_links}
+            <div class="flex flex-col gap-4 items-center md:flex-row md:justify-between md:w-full md:px-10 md:max-w-7xl pb-6">
+              <div class="md:w-[127px]">
+                <Icon
+                  width={45}
+                  height={16}
+                  strokeWidth={1}
+                  id="PinkAll"
+                />
+              </div>
+              <p class="text-[#111] text-[11px] font-normal text-center px-4">
+                Laços de Filó Com. de Ac. de Moda Ltda. | Av. das Américas, 700,
+                bloco 6, sala 317 - RJ, 22640-100 | CNPJ: 16.455.670/0001-32
+              </p>
+              <div class="flex flex-row gap-4">
+                <Icon
+                  width={66}
+                  height={16}
+                  strokeWidth={1}
+                  id="WicommBlack"
+                />
+                <Icon
+                  width={45}
+                  height={16}
+                  strokeWidth={1}
+                  id="Deco"
+                />
+              </div>
             </div>
           </div>
         )}
@@ -253,7 +286,7 @@ function Footer({
                 {_region}
               </div>
               <div class="flex flex-col gap-10 lg:gap-20 lg:w-1/2 lg:pr-10">
-                {_newsletter}
+                {/* {_newsletter} */}
                 {_sectionLinks}
               </div>
             </div>
@@ -269,7 +302,7 @@ function Footer({
             {_logo}
             <div class="flex flex-col lg:flex-row gap-14">
               <div class="flex flex-col md:flex-row lg:flex-col md:justify-between lg:justify-normal gap-10 lg:w-2/5">
-                {_newsletter}
+                {/* {_newsletter} */}
                 <div class="flex flex-col gap-10">
                   {_payments}
                   {_apps}
@@ -292,7 +325,7 @@ function Footer({
         )}
         {layout?.variation == "Variation 4" && (
           <div class="flex flex-col gap-10">
-            {_newsletter}
+            {/* {_newsletter} */}
             {layout?.hide?.newsletter ? <></> : <Divider />}
             <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between">
               {_sectionLinks}
@@ -320,7 +353,7 @@ function Footer({
         )}
         {layout?.variation == "Variation 5" && (
           <div class="flex flex-col gap-10">
-            {_newsletter}
+            {/* {_newsletter} */}
             {layout?.hide?.newsletter ? <></> : <Divider />}
             {_logo}
             <div class="flex flex-col md:flex-row gap-10 lg:gap-20 md:justify-between">
@@ -342,9 +375,11 @@ function Footer({
           </div>
         )}
       </div>
-      {layout?.hide?.backToTheTop
+      {
+        /* {layout?.hide?.backToTheTop
         ? <></>
-        : <BackToTop content={backToTheTop?.text} />}
+        : <BackToTop content={backToTheTop?.text} />} */
+      }
     </footer>
   );
 }
