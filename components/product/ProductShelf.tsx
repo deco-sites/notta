@@ -16,6 +16,7 @@ export interface Props {
   products: Product[] | null;
   title?: string;
   description?: string;
+  backgroundTransparent?: boolean
   layout?: {
     headerAlignment?: "center" | "left";
     headerfontSize?: "Normal" | "Large";
@@ -28,6 +29,7 @@ export interface Props {
   description,
   layout,
   cardLayout,
+  backgroundTransparent = true
 }: Props) {
   const id = useId();
   const platform = usePlatform();
@@ -38,7 +40,7 @@ export interface Props {
  
   
   return (
-    <div class="w-full container  py-8 flex flex-col gap-4 lg:gap-6 lg:py-10 relative">
+    <div class={`w-full container ${!backgroundTransparent ? "bg-[#DADBBA]" : "" }  py-8 flex flex-col gap-4 lg:gap-6 lg:py-10 relative`}>
       <Header
         title={title || ""}
         description={description || ""}

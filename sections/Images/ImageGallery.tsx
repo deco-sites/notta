@@ -233,7 +233,7 @@ export default function Gallery(props: Props) {
       : "sm:row-span-2";
 
   return (
-    <section class="container max-w-full  py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 px-0">
+    <section class="container max-w-full  py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 px-0 lg:my-10">
       {
         banners?.length == 3?
           <ul class="flex flex-wrap gap-1 md:grid md:grid-cols-2">
