@@ -7,9 +7,14 @@ export default function ExtraLinks({ content }: { content?: Item[] }) {
   return (
     <>
       {content && content?.length > 0 && (
-        <div class="flex flex-col md:flex-row gap-5 lg:gap-10">
+        <div class="flex flex-row gap-5 lg:gap-20">
           {content.map((item) => (
-            <a class="link text-sm" href={item.href}>{item.label}</a>
+            <a
+              class="link uppercase no-underline text-white text-[10px] md:text-xs "
+              href={item.href}
+            >
+              {item.label}
+            </a>
           ))}
         </div>
       )}
