@@ -31,7 +31,7 @@ function MenuItem({ item }: { item: INavItem }) {
             <Icon class="rotate-180" id="ArrowLeft" size={20} strokeWidth={1} />
           </div>
           <div
-            class={`fixed top-[180px] left-0 w-[100%] h-[80%] overflow-auto pb-56 bg-white shadow-lg transition-transform transform ${
+            class={`fixed top-[180px] left-0 w-[100%] h-[60%] overflow-auto pb-56 bg-white shadow-lg transition-transform transform ${
               isDrawerOpen ? "translate-x-0" : "-translate-x-full"
             }`}
           >

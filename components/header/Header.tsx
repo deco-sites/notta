@@ -22,6 +22,12 @@ export interface NavItem {
     src?: ImageWidget;
     alt?: string;
   };
+  linkHastags?: LinkHasTags[]
+}
+
+export interface LinkHasTags {
+  label: string;
+  href: string;
 }
 
 export interface Props {
@@ -47,6 +53,7 @@ export interface Props {
 
   /** @title Logo */
   logo?: { src: ImageWidget; alt: string };
+  linkHastags?: LinkHasTags[];
 }
 
 function Header({
@@ -56,6 +63,7 @@ function Header({
   navItems = [],
   suggestions,
   logo,
+  linkHastags,
 }: Props) {
   const platform = usePlatform();
   const searchbar = { ..._searchbar, products, suggestions };
@@ -70,7 +78,12 @@ function Header({
         >
           <div class="bg-base-100 fixed w-full z-50 bg-transparent">
             <Alert alerts={alerts} />
-            <Navbar items={navItems} searchbar={searchbar} logo={logo} />
+            <Navbar
+              items={navItems}
+              linkHastags={linkHastags}
+              searchbar={searchbar}
+              logo={logo}
+            />
           </div>
         </Drawers>
       </header>
