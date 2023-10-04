@@ -33,14 +33,9 @@
   filter: invert(1);
 }
 
-.icon-user:hover path,
-.icon-heart:hover path,
-.icon-cart:hover path{
-  fill: black;
-}
-.navbar-desktop .icon-heart:hover{
-  fill: black;
-  stroke: black;
+.navbar-desktop:hover .indicator-item{
+  background-color: #000;
+  color: #fff;
 }
 .group:disabled .group-disabled\:animate-progress {
   animation: progress-frame ease normal

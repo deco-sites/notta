@@ -9,16 +9,21 @@ import Searchbar from "$store/islands/Header/Searchbar.tsx";
 import Image from "apps/website/components/Image.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import type { INavItem } from "./NavItem.tsx";
+import { LinkHasTags } from "./Header.tsx";
 import NavItem from "./NavItem.tsx";
+
 import { headerHeightDesktop, headerHeightMobile } from "./constants.ts";
+import LinkTree from "../ui/LinkTree.tsx";
 // import "./styles.css";
 
-function Navbar({ items, searchbar, logo }: {
+function Navbar({ items, searchbar, logo, linkHastags }: {
   items: INavItem[];
   searchbar: SearchbarProps;
   logo?: { src: string; alt: string };
+  linkHastags?: LinkHasTags[];
 }) {
   const platform = usePlatform();
+  console.log();
 
   return (
     <>
@@ -55,9 +60,11 @@ function Navbar({ items, searchbar, logo }: {
 
       {/* Desktop Version */}
       <div class="hidden md:flex bg-gradient-to-b from-[rgba(0,0,0,0.77)] to-transparent backdrop-blur-[1px] pt-6 pb-6 hover:bg-[#ffffff96] hover:from-[#ffffffbf] navbar-desktop">
-        <div class="md:flex flex-row w-full justify-between items-center  max-w-screen-xl px-10 m-auto">
+        <div class="md:flex flex-row w-full justify-between items-center  max-w-screen-xl pl-6 pr-10 m-auto">
           <div class="flex justify-center">
-            {items.map((item) => <NavItem item={item} />)}
+            {items.map((item) => (
+              <NavItem item={item} linkHastags={linkHastags} />
+            ))}
           </div>
           <div class="flex-none w-44">
             {logo && (
