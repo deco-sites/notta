@@ -30,16 +30,12 @@ function MenuItem({ item }: { item: INavItem }) {
             <p>{item.label}</p>
             <Icon class="rotate-180" id="ArrowLeft" size={20} strokeWidth={1} />
           </div>
+
           <div
-            class={`fixed top-[180px] left-0 w-[100%] h-[60%] overflow-auto pb-56 bg-white shadow-lg transition-transform transform ${
+            class={`fixed top-[180px] left-0 w-[100%] h-[65%] overflow-auto pb-56 bg-white transition-transform transform ${
               isDrawerOpen ? "translate-x-0" : "-translate-x-full"
             }`}
           >
-            {
-              /* <div class="">
-              <Searchbar />
-            </div> */
-            }
             <div
               onClick={() => setIsDrawerOpen(!isDrawerOpen)}
               class="text-[#626262] text-base font-bold uppercase px-2 py-5 flex gap-3 items-center"
@@ -73,16 +69,25 @@ function MenuItemSecond({ item }: { item: INavItem }) {
   const [isDrawerOpenSecond, setIsDrawerOpenSecond] = useState(false);
   const [itemMenuSecond, setItemMenuSecond] = useState(item);
 
+  const targetDiv = document.querySelectorAll("#menu-item-second"); // Substitua 'suaDiv' pelo
+
   const toggleDrawerSecond = (item: INavItem) => {
     setItemMenuSecond(item);
     console.log(item);
     setIsDrawerOpenSecond(!isDrawerOpenSecond);
+    console.log(targetDiv);
+
+    if (targetDiv) {
+      targetDiv.forEach((item) => (
+        item.scrollTo({ top: 0, behavior: "smooth" })
+      ));
+    }
   };
 
   return (
     item.children !== undefined && item?.children?.length > 0
       ? (
-        <div class="w-full">
+        <div class="w-full ">
           <div
             onClick={() => toggleDrawerSecond(item)}
             class="text-[#626262] text-sm font-normal uppercase  flex justify-between items-center w-full"
@@ -91,7 +96,8 @@ function MenuItemSecond({ item }: { item: INavItem }) {
             <Icon class="rotate-180" id="ArrowLeft" size={20} strokeWidth={1} />
           </div>
           <div
-            class={`fixed top-0 left-0 bottom-0  w-[100%] h-full overflow-auto pb-56 bg-white shadow-lg transition-transform transform ${
+            id="menu-item-second"
+            class={`fixed top-0 left-0 bottom-0 max-h-[480px] w-[100%] h-screen overflow-auto bg-white  transition-transform transform ${
               isDrawerOpenSecond
                 ? "translate-x-0 z-[1000]"
                 : "-translate-x-full"
@@ -155,7 +161,6 @@ function Menu({ items }: Props) {
           </li>
         ))}
       </ul>
-
       <FooterMenu />
     </div>
   );
