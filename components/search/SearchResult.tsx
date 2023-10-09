@@ -108,7 +108,7 @@ function Result({
 }
 
 function SearchResult({ page, ...props }: Props) {
-  if (!page) {
+  if (!page || page?.products.length === 0) {
     return <NotFound />;
   }
 
