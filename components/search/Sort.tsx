@@ -40,7 +40,7 @@ function Sort({ sortOptions }: Props) {
       id="sort"
       name="sort"
       onInput={applySort}
-      class="w-min h-[36px] px-1 rounded m-2 text-base-content cursor-pointer outline-none"
+      class="flex border-[0.5px] border-[#000] px-3 py-[13px] rounded-0 text-xs uppercase text-[#12100c] cursor-pointer outline-none bg-transparent w-[45%]"
     >
       {sortOptions.map(({ value, label }) => ({
         value,

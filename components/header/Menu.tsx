@@ -15,7 +15,6 @@ function MenuItem({ item }: { item: INavItem }) {
 
   const toggleDrawer = (item: INavItem) => {
     setItemMenu(item);
-    console.log(item);
     setIsDrawerOpen(!isDrawerOpen);
   };
 
@@ -73,9 +72,9 @@ function MenuItemSecond({ item }: { item: INavItem }) {
 
   const toggleDrawerSecond = (item: INavItem) => {
     setItemMenuSecond(item);
-    console.log(item);
+
     setIsDrawerOpenSecond(!isDrawerOpenSecond);
-    console.log(targetDiv);
+
 
     if (targetDiv) {
       targetDiv.forEach((item) => (

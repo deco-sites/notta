@@ -51,6 +51,7 @@ export type AvailableIcons =
   | "WicommBlack"
   | "Deco"
   | "SmileBlack"
+  | "ArrowDownFilter"
   | "Zoom";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {

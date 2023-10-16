@@ -23,7 +23,7 @@ function Navbar({ items, searchbar, logo, linkHastags }: {
   linkHastags?: LinkHasTags[];
 }) {
   const platform = usePlatform();
-  console.log();
+
 
   return (
     <>

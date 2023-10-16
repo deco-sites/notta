@@ -26,11 +26,16 @@ function SearchControls(
       aside={
         <>
           <div class="bg-base-100 flex flex-col h-full divide-y overflow-y-hidden">
-            <div class="flex justify-between items-center">
-              <h1 class="px-4 py-3">
-                <span class="font-medium text-2xl">Filtrar</span>
+            <div class="flex justify-between items-center bg-[#DADBBA] px-4 py-7">
+              <h1>
+                <span class="font-normal text-base text-[#12100C]">
+                  Filtros
+                </span>
               </h1>
-              <Button class="btn btn-ghost" onClick={() => open.value = false}>
+              <Button
+                class="btn btn-ghost p-0"
+                onClick={() => open.value = false}
+              >
                 <Icon id="XMark" size={24} strokeWidth={2} />
               </Button>
             </div>
@@ -41,22 +46,31 @@ function SearchControls(
         </>
       }
     >
-      <div class="flex flex-col justify-between mb-4 p-4 sm:mb-0 sm:p-0 sm:gap-4 sm:flex-row sm:h-[53px] sm:border-b sm:border-base-200">
-        <div class="flex flex-row items-center sm:p-0 mb-2">
-          <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
-        </div>
-
-        <div class="flex flex-row items-center justify-between border-b border-base-200 sm:gap-4 sm:border-none">
-          <Button
-            class={displayFilter ? "btn-ghost" : "btn-ghost sm:hidden"}
-            onClick={() => {
-              open.value = true;
-            }}
-          >
-            Filtrar
-            <Icon id="FilterList" width={16} height={16} />
-          </Button>
-          {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
+      <div class="flex flex-col justify-between mb-4  sm:mb-0 sm:p-0 sm:gap-4 sm:flex-row sm:h-[53px] sm:border-b sm:border-base-200">
+        <div class="flex flex-col  border-b border-base-200 py-2 sm:gap-4 sm:border-none">
+          <div class="flex flex-row items-center sm:p-0">
+            <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
+          </div>
+          <div class="flex gap-3 justify-between">
+            <button
+              class={`${
+                displayFilter ? "" : "sm:hidden"
+              } flex border-[0.5px] border-[#000] p-3 rounded-0 text-xs uppercase text-[#12100c] w-[45%] gap-3`}
+              onClick={() => {
+                open.value = true;
+              }}
+            >
+              Filtros
+              <Icon
+                width={20}
+                height={16}
+                strokeWidth={2}
+                id="ArrowDownFilter"
+                class=""
+              />
+            </button>
+            {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
+          </div>
         </div>
       </div>
     </Drawer>
