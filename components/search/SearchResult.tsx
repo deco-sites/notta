@@ -52,11 +52,10 @@ function Result({
         />
 
         <div class="flex flex-row">
-          {layout?.variant === "aside" && filters.length > 0 && (
-            <aside class="hidden sm:block w-min min-w-[250px]">
-              <Filters filters={filters} />
-            </aside>
-          )}
+          <section class="hidden sm:block w-min min-w-[250px]">
+            <Filters filters={filters} />
+          </section>
+
           <div class="flex-grow">
             <ProductGallery products={products} layout={cardLayout} />
           </div>
