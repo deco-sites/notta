@@ -41,6 +41,11 @@
   animation: progress-frame ease normal
 }
 
+.dropdown-filter{
+  border-radius: 0px 0px 8px 8px;
+  background: #FFF;
+  box-shadow: 1px 4px 6px 0px rgba(0, 0, 0, 0.16);
+}
 
 @keyframes progress-frame {
   0% {

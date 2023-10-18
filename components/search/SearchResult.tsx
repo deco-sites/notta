@@ -1,13 +1,15 @@
 import { SendEventOnLoad } from "$store/components/Analytics.tsx";
 import { Layout as cardLayout } from "$store/components/product/ProductCard.tsx";
 import Filters from "$store/components/search/Filters.tsx";
+import FiltersDesktop from "./FiltersDesktop.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
 import SearchControls from "$store/islands/SearchControls.tsx";
 import { useOffer } from "$store/sdk/useOffer.ts";
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
-
+import { signal, useSignal } from "@preact/signals";
+import { useUI } from "../../sdk/useUI.ts";
 export interface Layout {
   /**
    * @description Use drawer for mobile like behavior on desktop. Aside for rendering the filters alongside the products
@@ -41,9 +43,13 @@ function Result({
 }: Omit<Props, "page"> & { page: ProductListingPage }) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
 
+  const toggleDropDown = () => {
+    // openDropDown.value = !openDropDown.value;
+  };
+
   return (
     <>
-      <div class="container px-4 sm:py-10">
+      <div class="container px-4 sm:py-10 flex flex-col md:gap-8">
         <SearchControls
           sortOptions={sortOptions}
           filters={filters}
@@ -52,9 +58,11 @@ function Result({
         />
 
         <div class="flex flex-row">
-          <section class="hidden sm:block w-min min-w-[250px]">
-            <Filters filters={filters} />
-          </section>
+          {
+            /* <section class="hidden sm:block w-min min-w-[250px]">
+            <FiltersDesktop filters={filters} />
+          </section> */
+          }
 
           <div class="flex-grow">
             <ProductGallery products={products} layout={cardLayout} />
