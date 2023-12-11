@@ -23,7 +23,7 @@ export interface Props {
   /**
    * @description Instagram user.
    */
-  instagramUser?:string;
+  instagramUser?: string;
   /**
    * @description Get it in Facebook app. Expires every 90 days.
    * @format textarea
@@ -55,11 +55,11 @@ export async function loader(
   };
 
   return {
-    data: data.slice(0, layout?.numberOfPosts ?? 6),
+    data: data?.slice(0, layout?.numberOfPosts ?? 6),
     title,
     description,
     layout,
-    instagramUser
+    instagramUser,
   };
 }
 
@@ -80,22 +80,30 @@ export default function InstagramPosts({
   return (
     <div class="w-full container lg:max-w-[900px] mx-auto px-4 py-8 flex flex-col gap-6 lg:gap-8 lg:py-14 lg:px-0">
       <div class="flex flex-col items-center justify-center gap-4">
-          <Header
-            title={title}
-            description={description}
-            alignment={layout?.headerAlignment || "center"}
-          />
-        
-          {
-                instagramUser && 
-                <div class={"flex justify-center items-center w-full"}>
-                  <a href={`https://www.instagram.com/${instagramUser.replace("@","")}`} target="_blank" class="btn btn-primary bg-transparent min-w-[148px] text-black font-normal text-sm" rel="noopener noreferrer">
-                    {instagramUser}
-                  </a>
-                </div>
-              } 
+        <Header
+          title={title}
+          description={description}
+          alignment={layout?.headerAlignment || "center"}
+        />
+
+        {instagramUser &&
+          (
+            <div class={"flex justify-center items-center w-full"}>
+              <a
+                href={`https://www.instagram.com/${
+                  instagramUser.replace("@", "")
+                }`}
+                target="_blank"
+                class="btn btn-primary bg-transparent min-w-[148px] text-black font-normal text-sm"
+                rel="noopener noreferrer"
+              >
+                {instagramUser}
+              </a>
+            </div>
+          )}
       </div>
-      <div class="hidden lg:grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4 lg:grid-cols-5 lg:grid-cols-6"></div>
+      <div class="hidden lg:grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4 lg:grid-cols-5 lg:grid-cols-6">
+      </div>
       <div
         class={`grid grid-cols-2 lg:grid-cols-${
           layout?.postsPerLine || 3
@@ -120,15 +128,17 @@ export default function InstagramPosts({
                     height={350}
                     loading="lazy"
                   />
-
                 </div>
               )
               : (
                 <div class="w-full pt-[100%] relative">
-                  <video controls preload="none" class="w-full h-full object-cover absolute top-0 left-0">
+                  <video
+                    controls
+                    preload="none"
+                    class="w-full h-full object-cover absolute top-0 left-0"
+                  >
                     <source src={item.media_url}></source>
                   </video>
-
                 </div>
               )}
           </a>
